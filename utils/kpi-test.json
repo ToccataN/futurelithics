@@ -1,0 +1,95 @@
+{
+	"data" : [
+      {
+      	"dpt_name": "segment1",
+      	"productivity": {
+      		"current": 97000,
+      		"goal": 100000,
+      		"increase": true
+      	},
+      	"costs": {
+      		"current": 300000,
+      		"goal": 200000,
+      		"increase": false
+      	},
+      	"externalities": {
+      		"current": 3000,
+      		"goal": 0,
+      		"increase": false
+      	}
+      },
+      {
+      	"dpt_name": "segment2",
+      	"productivity": {
+      		"current": 8400,
+      		"goal": 15000,
+      		"increase": true
+      	},
+      	"costs": {
+      		"current": 20000,
+      		"goal": 15000,
+      		"increase": false
+      	},
+      	"externalities": {
+      		"current": 500,
+      		"goal": 10,
+      		"increase": false
+      	}
+      },
+      {
+      	"dpt_name": "segment3",
+      	"productivity": {
+      		"current": 300400,
+      		"goal": 120000,
+      		"increase": true
+      	},
+      	"costs": {
+      		"current": 450000,
+      		"goal": 350000,
+      		"increase": false
+      	},
+      	"externalities": {
+      		"current": 20000,
+      		"goal": 5000,
+      		"increase": false
+      	}
+      },
+      {
+      	"dpt_name": "segment4",
+      	"productivity": {
+      		"current": 70400,
+      		"goal": 170000,
+      		"increase": true
+      	},
+      	"costs": {
+      		"current": 40000,
+      		"goal": 25000,
+      		"increase": false
+      	},
+      	"externalities": {
+      		"current": 100,
+      		"goal": 10,
+      		"increase": false
+      	}
+      },
+      {
+      	"dpt_name": "segment5",
+      	"productivity": {
+      		"current": 7400,
+      		"goal": 17000,
+      		"increase": true
+      	},
+      	"costs": {
+      		"current": 4000,
+      		"goal": 3000,
+      		"increase": false
+      	},
+      	"externalities": {
+      		"current": 1200,
+      		"goal": 0,
+      		"increase": false
+      	}
+      }
+	]
+	
+}

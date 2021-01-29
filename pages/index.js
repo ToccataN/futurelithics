@@ -1,65 +1,63 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import styles from '../styles/Home.module.scss';
+
+import Layout from '../components/Layout';
+import CustomCard from '../components/CustomCard';
+
+import {
+  Container,
+  Row,
+  Col,
+} from 'reactstrap'
+
 
 export default function Home() {
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
+    <div>
+      <Layout>
+        <main className={styles.main}>
+          <div className={styles.heroImage}>
+            <img src='/hero-logo3.gif' alt="Future Lithics" width="1000px" />
+          </div>
+          <div className={styles.dataViz}>
+            <Container style={{height: "100%"}}>
+              <Row>
+              <h2>
+                <img src="/dvanalysis.svg" alt="Data Visualization and Analysis" width="100%" />
+              </h2>
+              </Row>
+              <Row 
+                className={"justify-content-center align-content-center pt-4 flex-grow-1"} 
+                style={{marginTop: "40px"}}
+              >
+                <Col md={4} xs={8}>
+                  <CustomCard
+                    title={"Interface Development"}
+                    text="Interactive Dashboards and analytics tools to suit your data requirements."
+                    img="/nodegraphic2.svg"
+                    link={'/dataVisuals'}
+                    color="#44FFD2"
+                    bgColor="#151415"
+                    bodyColor="#272529"
+                  />
+                </Col>
+              </Row>
+            </Container>
+          </div>
+          <div className={styles.featured}>
+            <Container style={{height: "100%"}} className="py-4 justify-content-center align-content-center text-center">
+              <h3 className="my-4">Coming Soon</h3>
+              <div className="my-4">
+                <img src="/spectrafact-promo.png" alt="spectrafact" width="255px" />
+              </div>
+              <h2 className="my-4">
+                <a href="https://xd.adobe.com/view/0dec45e4-7c0d-492c-8704-30b6949345f9-58bf/" target="_blank">
+                  <img src="/spectrafact-text.png" width="250px" alt="link to spectrafact prototype" />
+                </a>
+              </h2>
+            </Container>
+          </div>
+        </main>
+      </Layout>
     </div>
   )
 }
