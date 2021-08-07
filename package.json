@@ -1,0 +1,25 @@
+{
+  "name": "express-react",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "server": "nodemon ./bin/www",
+    "client": "cd client && yarn start",
+    "start": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
+    "formatter": "eslint routes/**/*.js *.js --fix && yarn prettier --write routes/**/*.js *.js && cd client && yarn formatter",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "dot-env": "^0.0.1",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "jade": "~1.11.0",
+    "morgan": "~1.9.1",
+    "prettier": "^2.3.2"
+  },
+  "devDependencies": {
+    "eslint": "^7.32.0"
+  }
+}
