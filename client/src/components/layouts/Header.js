@@ -1,12 +1,16 @@
 import React, {useState} from 'react';
 import { NavLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { NavbarBrand, Navbar, Nav, NavItem, Button } from 'reactstrap'
+import { connect } from "react-redux";
+
+import { loginUser, logoutUser } from "../../redux/auth/actions";
 
 import { basicRoutes } from '../../routes';
 
 import LoginModal from '../modals/LoginModal';
 
-export const Header = () => {
+const Header = (props) => {
 
 	const [ modalOpen, setModalOpen ] = useState(false);
 
@@ -33,7 +37,24 @@ export const Header = () => {
           </NavItem>
         </Nav>
 		  </Navbar>
-		  <LoginModal modalOpen={modalOpen} setModalOpen={setModalOpen} />
+		  <LoginModal modalOpen={modalOpen} setModalOpen={setModalOpen} loginUser={props.loginUser} />
 		</React.Fragment>
 	);
 }
+
+const mapStateToProps = (state) => {
+  return {
+    auth: state.auth,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  loginUser: (creds) => dispatch(loginUser(creds)),
+  logoutUser: () => dispatch(logoutUser())
+});
+
+Header.propTypes = {
+	loginUser: PropTypes.func
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header)

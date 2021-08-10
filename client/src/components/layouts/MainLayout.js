@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import { basicRoutes } from '../../routes';
 
-import { Header } from './Header'
+import Header from './Header'
 
 
 const MainLayout = () => {

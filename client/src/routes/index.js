@@ -14,4 +14,4 @@ export const basicRoutes = [
 		path: "/about",
 		component: About
 	},
-]
+];
