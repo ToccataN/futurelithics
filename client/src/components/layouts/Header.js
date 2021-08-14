@@ -4,15 +4,17 @@ import PropTypes from 'prop-types';
 import { NavbarBrand, Navbar, Nav, NavItem, Button } from 'reactstrap'
 import { connect } from "react-redux";
 
-import { loginUser, logoutUser } from "../../redux/auth/actions";
+import { loginUser, logoutUser, registerUser } from "../../redux/auth/actions";
 
 import { basicRoutes } from '../../routes';
 
 import LoginModal from '../modals/LoginModal';
+import RegisterModal from '../modals/RegisterModal';
 
 const Header = (props) => {
 
 	const [ modalOpen, setModalOpen ] = useState(false);
+	const [ registerModalOpen, setRegisterModalOpen ] = useState(false);
 
 	return (
 		<React.Fragment>
@@ -32,12 +34,16 @@ const Header = (props) => {
 		  		})}
         </Nav>
         <Nav className="flex-row ms-auto">
-          <NavItem className="pl-4">
-            <Button onClick={ () => setModalOpen(!modalOpen) }> Login</Button>
+          <NavItem className="pl-2">
+            <Button onClick={ () => setModalOpen(!modalOpen) }>Login</Button>
+          </NavItem>
+          <NavItem className="pl-2">
+            <Button onClick={ () => setRegisterModalOpen(!registerModalOpen) }>Sign Up</Button>
           </NavItem>
         </Nav>
 		  </Navbar>
 		  <LoginModal modalOpen={modalOpen} setModalOpen={setModalOpen} loginUser={props.loginUser} />
+		  <RegisterModal modalOpen={registerModalOpen} setModalOpen={setRegisterModalOpen} registerUser={props.registerUser} />
 		</React.Fragment>
 	);
 }
@@ -50,11 +56,13 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({
   loginUser: (creds) => dispatch(loginUser(creds)),
+  registerUser: (creds) => dispatch(registerUser(creds)),
   logoutUser: () => dispatch(logoutUser())
 });
 
 Header.propTypes = {
-	loginUser: PropTypes.func
+	loginUser: PropTypes.func,
+	registerUser: PropTypes.func
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header)

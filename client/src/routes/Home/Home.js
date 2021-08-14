@@ -6,7 +6,6 @@ export const Home = () => {
 	  	<h3>Leveraging: </h3>
 	  	<ul>
 	  		<li>Redux</li>
-	  		<li>PostGreSQL</li>
 	  		<li>D3</li>
 	  		<li>SASS</li>
 	  	</ul>
