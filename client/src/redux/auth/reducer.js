@@ -70,7 +70,7 @@ export const UserAuth = (
         ...state,
         isLoading: false,
         isAuthenticated: false,
-        token: "",
+        token: null,
         user: null,
       };
     default:

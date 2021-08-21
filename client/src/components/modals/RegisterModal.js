@@ -15,7 +15,7 @@ const RegisterModal = (props) => {
     const res = await registerUser(creds);
     console.log(res, 'res')
     if (res.success){
-      toggle(); 
+      toggle(modalOpen); 
     }   
   };
 

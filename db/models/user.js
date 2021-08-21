@@ -2,7 +2,7 @@ const { Sequelize, DataTypes, Model } = require("sequelize");
 const sequelize = require("../index.js");
 const bcrypt = require("bcryptjs");
 
-class User extends Model {} 
+class User extends Model {}
 
 User.init(
   {
@@ -26,6 +26,11 @@ User.init(
   }
 );
 
+//compare encrypted with plain password
+User.prototype.comparePassword = function (password) {
+  return bcrypt.compareSync(password, this.password);
+};
+
 //store password as hash
 User.beforeSave((user, options) => {
   if (user.changed("password")) {
@@ -36,14 +41,5 @@ User.beforeSave((user, options) => {
     );
   }
 });
-
-//compare encrypted with plain password
-User.prototype.comparePassword = function (pass, cb) {
-  bcrypt.compare(pass, this.password, function (err, isMatch) {
-    if (err) {
-      return cb(null, false);
-    }
-  });
-};
 
 module.exports = User;

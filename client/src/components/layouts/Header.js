@@ -35,10 +35,29 @@ const Header = (props) => {
         </Nav>
         <Nav className="flex-row ms-auto">
           <NavItem className="pl-2">
-            <Button onClick={ () => setModalOpen(!modalOpen) }>Login</Button>
+            {
+            	props.auth.isAuthenticated ? (
+		            <Button
+		              onClick={ () =>{
+		              	props.logoutUser()
+		              }}
+		            >Logout</Button>
+            	) : (
+		            <Button
+		              onClick={ () =>{
+		                setModalOpen(!modalOpen)
+		              }}
+		            >Login</Button>
+            	)
+            }
+
           </NavItem>
           <NavItem className="pl-2">
-            <Button onClick={ () => setRegisterModalOpen(!registerModalOpen) }>Sign Up</Button>
+            <Button 
+	            onClick={ () =>{ 
+	            	setRegisterModalOpen(!registerModalOpen) 
+	            }}
+            >Sign Up</Button>
           </NavItem>
         </Nav>
 		  </Navbar>
@@ -62,7 +81,9 @@ const mapDispatchToProps = (dispatch) => ({
 
 Header.propTypes = {
 	loginUser: PropTypes.func,
-	registerUser: PropTypes.func
+	logoutUser: PropTypes.func,
+	registerUser: PropTypes.func,
+	auth: PropTypes.object
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header)

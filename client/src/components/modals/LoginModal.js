@@ -12,7 +12,7 @@ const LoginModal = (props) => {
   const submissionHandler = async () => {
     const creds = { username: username, password: password };
     loginUser(creds);
-    toggle(); 
+    toggle(modalOpen); 
   };
 
   const toggle = (bool) => {

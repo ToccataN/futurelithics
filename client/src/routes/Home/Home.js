@@ -8,6 +8,9 @@ export const Home = () => {
 	  		<li>Redux</li>
 	  		<li>D3</li>
 	  		<li>SASS</li>
+	  		<li>PostGreSQL</li>
+	  		<li>Passport</li>
+	  		<li>JWT Authentication Strategy</li>
 	  	</ul>
 	  </React.Fragment>
 	);
