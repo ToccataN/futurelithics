@@ -2,21 +2,24 @@ import React from "react";
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from  'react-redux';
 import { configureStore } from './redux/store.js';
+import { PersistGate } from 'redux-persist/integration/react'
 
 import MainLayout from './components/layouts/MainLayout'
 import "./App.scss";
 
 function App() {
   
-  const { store } = configureStore();
+  const { store, persistor } = configureStore();
 
   return (
     <Provider store={store} >
-      <BrowserRouter>
-        <div className="App">
-          <MainLayout />
-        </div>
-      </BrowserRouter>
+      <PersistGate loading={null} persistor={persistor}>
+        <BrowserRouter>
+          <div className="App">
+            <MainLayout />
+          </div>
+        </BrowserRouter>
+      </PersistGate>
     </Provider>
   );
 }
