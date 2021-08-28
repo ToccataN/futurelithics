@@ -1,20 +1,24 @@
 import React, {useState} from 'react';
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { NavbarBrand, Navbar, Nav, NavItem, Button } from 'reactstrap'
+import { NavbarBrand, Navbar, Nav, NavItem } from 'reactstrap'
 import { connect } from "react-redux";
-
-import { loginUser, logoutUser, registerUser } from "../../redux/auth/actions";
 
 import { basicRoutes } from '../../routes';
 
-import LoginModal from '../modals/LoginModal';
-import RegisterModal from '../modals/RegisterModal';
+import ModalContainer from '../modals/ModalContainer';
+import NonAuthHeader from './navigation/NonAuthHeader';
+import AuthHeader from './navigation/AuthHeader';
 
 const Header = (props) => {
 
 	const [ modalOpen, setModalOpen ] = useState(false);
-	const [ registerModalOpen, setRegisterModalOpen ] = useState(false);
+	const [ modalType, setModalType ] = useState(null);
+
+	const toggleModal = (type) => {
+		setModalOpen(!modalOpen);
+		setModalType(type);
+	}
 
 	return (
 		<React.Fragment>
@@ -33,36 +37,9 @@ const Header = (props) => {
 		  			);
 		  		})}
         </Nav>
-        <Nav className="flex-row ms-auto">
-          <NavItem className="pl-2">
-            {
-            	props.auth.isAuthenticated ? (
-		            <Button
-		              onClick={ () =>{
-		              	props.logoutUser()
-		              }}
-		            >Logout</Button>
-            	) : (
-		            <Button
-		              onClick={ () =>{
-		                setModalOpen(!modalOpen)
-		              }}
-		            >Login</Button>
-            	)
-            }
-
-          </NavItem>
-          <NavItem className="pl-2">
-            <Button 
-	            onClick={ () =>{ 
-	            	setRegisterModalOpen(!registerModalOpen) 
-	            }}
-            >Sign Up</Button>
-          </NavItem>
-        </Nav>
+        { props.auth.isAuthenticated ? <AuthHeader /> : <NonAuthHeader toggler={toggleModal} /> }
 		  </Navbar>
-		  <LoginModal modalOpen={modalOpen} setModalOpen={setModalOpen} loginUser={props.loginUser} />
-		  <RegisterModal modalOpen={registerModalOpen} setModalOpen={setRegisterModalOpen} registerUser={props.registerUser} />
+		  <ModalContainer modalOpen={modalOpen} setModalOpen={setModalOpen} type={modalType} />
 		</React.Fragment>
 	);
 }
@@ -73,17 +50,9 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  loginUser: (creds) => dispatch(loginUser(creds)),
-  registerUser: (creds) => dispatch(registerUser(creds)),
-  logoutUser: () => dispatch(logoutUser())
-});
-
 Header.propTypes = {
-	loginUser: PropTypes.func,
 	logoutUser: PropTypes.func,
-	registerUser: PropTypes.func,
 	auth: PropTypes.object
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header)
+export default connect(mapStateToProps)(Header)
