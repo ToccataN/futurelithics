@@ -1,45 +1,69 @@
-const { Sequelize, DataTypes, Model } = require("sequelize");
-const sequelize = require("../index.js");
+'use strict';
 const bcrypt = require("bcryptjs");
 
-class User extends Model {}
-
-User.init(
-  {
-    // Model attributes are defined here
-    userName: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    password: {
-      type: DataTypes.STRING,
-      allowNull: false,
+const {
+  Model
+} = require('sequelize');
+module.exports = (sequelize, DataTypes) => {
+  class User extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      // define association here
     }
-  },
-  {
+  };
+  User.init({
+    name: DataTypes.STRING,
+    email: DataTypes.STRING,
+    password: DataTypes.STRING
+  }, {
     sequelize,
-    modelName: `User`,
-    timestamps: true,
-    createdAt: false,
-    updatedAt: "updateTimestamp",
-    freezeTableName: true,
-  }
-);
+    modelName: 'User',
+    hooks: {
+      beforeBulkCreate: (users, options) => {
+        {
+          for (const user of users) {
+            user.password = bcrypt.hashSync(
+              user.password,
+              10
+            );
+          }
+        }
+      },
+      beforeCreate: (user, options) => {
+        {
+          if (user.changed("password")) {
+            user.password = bcrypt.hashSync(
+              user.password,
+              bcrypt.genSaltSync(10),
+              null
+            );
+          }
+          user.createdAt = new Date();
+          user.updatedAt = new Date();
+        }
+      },
+      beforeUpdate: (user, options) => {
+        {
+          if (user.changed("password")) {
+            user.password = bcrypt.hashSync(
+              user.password,
+              bcrypt.genSaltSync(10),
+              null
+            );
+          }
+          user.updatedAt = new Date();
+        }
+      }
+    },
+  });
 
-//compare encrypted with plain password
-User.prototype.comparePassword = function (password) {
-  return bcrypt.compareSync(password, this.password);
+  User.prototype.comparePassword = function (password) {
+    return bcrypt.compareSync(password, this.password);
+  };
+
+  return User;
 };
-
-//store password as hash
-User.beforeSave((user, options) => {
-  if (user.changed("password")) {
-    user.password = bcrypt.hashSync(
-      user.password,
-      bcrypt.genSaltSync(10),
-      null
-    );
-  }
-});
-
-module.exports = User;

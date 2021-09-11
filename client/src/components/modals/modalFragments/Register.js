@@ -11,11 +11,12 @@ const Register = (props) => {
   const { toggle, registerUser } = props;
 
   const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
 
   const submissionHandler = async () => {
-    const creds = { username: username, password: password, passwordConfirm: passwordConfirm };
+    const creds = { username, password, passwordConfirm, email };
     registerUser(creds);
     toggle(); 
   };
@@ -28,6 +29,10 @@ const Register = (props) => {
       <FormGroup>
         <Label htmlFor="username">Username</Label>
         <Input type="text" id="username" name="username" onChange={(e) => setUsername(e.target.value)} />
+      </FormGroup>
+      <FormGroup>
+        <Label htmlFor="email">Email</Label>
+        <Input type="text" id="email" name="email" onChange={(e) => setEmail(e.target.value)} />
       </FormGroup>
       <FormGroup>
         <Label htmlFor="password">Password</Label>

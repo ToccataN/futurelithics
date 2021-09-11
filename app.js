@@ -10,7 +10,7 @@ var usersRouter = require("./routes/users");
 var cors = require("cors");
 var app = express();
 
-var sequelize = require("./db/index.js");
+var sequelize = require("./db/models/index.js");
 
 app.use(passport.initialize());
 

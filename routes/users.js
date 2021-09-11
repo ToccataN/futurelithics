@@ -3,13 +3,13 @@ var router = express.Router();
 var bodyParser = require("body-parser");
 var passport = require("passport");
 var authenticate = require("../utilities/authenticate");
-const User = require("../db/models/user");
+const model = require('../db/models');
 
 router.use(bodyParser.json());
 
 /* GET users listing. */
 router.get("/", function (req, res, next) {
-  User.findAll()
+  model.User.findAll()
     .then((users) => {
       res.json(users);
     })
@@ -19,18 +19,20 @@ router.get("/", function (req, res, next) {
 });
 
 router.post("/register", function (req, res, next) {
-  const { username, password, passwordConfirm } = req.body;
+  const { username, password, email, passwordConfirm } = req.body;
 
-  User.create({
-    userName: username,
+  model.User.create({
+    name: username,
     password: password,
+    email: email
   })
     .then((user) => {
       const userObject = user.toJSON();
       let token = authenticate.getToken(userObject);
       let responseObject = {
         id: userObject.id,
-        username: userObject.userName,
+        username: userObject.name,
+        email: userObject.email
       };
       res.statusCode = 200;
       res.setHeader("Content-Type", "application/json");
@@ -50,10 +52,9 @@ router.post("/register", function (req, res, next) {
 
 router.post("/login", function (req, res, next) {
   const { username, password } = req.body;
-
-  User.findOne({
+  model.User.findOne({
     where: {
-      userName: username,
+      name: username,
     },
   })
     .then((user) => {
@@ -62,7 +63,9 @@ router.post("/login", function (req, res, next) {
       if (!user) {
         res.json({ success: false, status: "Login failed, user not found." });
       }
+      console.log(password, "password")
       const checkPassword = user.comparePassword(password);
+      console.log(checkPassword, "checkPassword")
 
       if (!checkPassword) {
         res.json({
@@ -74,7 +77,8 @@ router.post("/login", function (req, res, next) {
         let token = authenticate.getToken(userObject);
         let responseObject = {
           id: userObject.id,
-          username: userObject.userName,
+          username: userObject.name,
+          email: userObject.email
         };
         res.statusCode = 200;
         res.json({
