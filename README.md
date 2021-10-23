@@ -25,4 +25,4 @@ DB_USERNAME=username
 
 - Run migrations: `npx sequelize-cli db:migrate`
 
-- Run seeders: npx sequelize-cli db:seed:all
+- Run seeders: `npx sequelize-cli db:seed:all`
