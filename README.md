@@ -4,6 +4,8 @@
 
 #### Env setup
 
+- yarn install
+
 ```
 CONNECTION_STRING=postgres://postgres:password@host:port/db_name
 DB_USE_SSL=false
