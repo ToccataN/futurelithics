@@ -13,6 +13,7 @@
     "d3": "^7.0.0",
     "dot-env": "^0.0.1",
     "font-awesome": "^4.7.0",
+    "http-proxy-middleware": "^0.19.1",
     "node-sass": "4.14.1",
     "prettier": "^2.3.2",
     "prop-types": "^15.7.2",
@@ -36,7 +37,6 @@
     "eject": "react-scripts eject",
     "formatter": "eslint src/**/*.js --fix && yarn prettier --write src/**/*.js"
   },
-  //"proxy": "http://localhost:5000",
   "eslintConfig": {
     "extends": [
       "react-app",
