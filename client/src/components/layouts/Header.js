@@ -10,6 +10,8 @@ import ModalContainer from '../modals/ModalContainer';
 import NonAuthHeader from './navigation/NonAuthHeader';
 import AuthHeader from './navigation/AuthHeader';
 
+import Logo1 from '../../assets/images/Logo1.svg';
+
 const Header = (props) => {
 
 	const [ modalOpen, setModalOpen ] = useState(false);
@@ -21,16 +23,16 @@ const Header = (props) => {
 	}
 
 	return (
-		<React.Fragment>
-		  <Navbar>
+		<div className="header py-2">
+		  <Navbar className="container">
 		  	<NavbarBrand href={'/'}>
-		  		<h2>React-Express Scaffold</h2>
+		  		<img src={Logo1} alt="Future Lithics" />
 		  	</NavbarBrand>
 		  	<Nav className="flex-row me-auto">
 		  		{basicRoutes.map((route) => {
 		  			return (
 		  				<NavItem key={`nav-link-${route.name}`} className="mr-2 px-2">
-		  					<NavLink exact to={route.path} className="nav-link">
+		  					<NavLink exact to={route.path} className="nav-link link-primary">
 		  						{route.niceName}
 		  					</NavLink>
 		  				</NavItem>
@@ -40,7 +42,7 @@ const Header = (props) => {
         { props.auth.isAuthenticated ? <AuthHeader /> : <NonAuthHeader toggler={toggleModal} /> }
 		  </Navbar>
 		  <ModalContainer modalOpen={modalOpen} setModalOpen={setModalOpen} type={modalType} />
-		</React.Fragment>
+		</div>
 	);
 }
 

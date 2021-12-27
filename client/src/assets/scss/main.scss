@@ -1,0 +1,29 @@
+.nav-item .nav-link.active {
+  color: $secondary;
+  border-bottom: 1px solid $secondary;
+}
+
+a {
+  color: $primary;
+}
+
+.modal-content {
+  background-color: $darkash !important;
+}
+
+.header {
+  background-color: $darkash;
+}
+
+.custom-radial-bg {
+	background: radial-gradient(circle at 73% 50%, $base-brown, $base-brown 1%,$midnight 50%, $midnight 90%)
+}
+
+.hero-image {
+	max-width: 100%;
+}
+
+.navbar-brand img {
+	width: 225px
+}
+

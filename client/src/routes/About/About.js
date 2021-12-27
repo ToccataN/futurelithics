@@ -5,7 +5,7 @@ export const About = (props) => {
 
 	return (
 		<React.Fragment>
-		  <h2>Author: CRDenaux</h2>
+		  <h2 className="text-danger">Author: CRDenaux</h2>
 		</React.Fragment>
 	);
 }

@@ -63,9 +63,8 @@ router.post("/login", function (req, res, next) {
       if (!user) {
         res.json({ success: false, status: "Login failed, user not found." });
       }
-      console.log(password, "password")
+
       const checkPassword = user.comparePassword(password);
-      console.log(checkPassword, "checkPassword")
 
       if (!checkPassword) {
         res.json({

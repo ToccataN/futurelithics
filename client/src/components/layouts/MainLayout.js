@@ -8,7 +8,7 @@ import Header from './Header'
 
 const MainLayout = () => {
 	return (
-	  <div className="main-layout container">
+	  <React.Fragment>
 	    <Router>
 	      <Header />
 	      <Switch>
@@ -17,7 +17,7 @@ const MainLayout = () => {
 			  	})}
 	  	  </Switch>
 	  	</Router>
-	  </div>
+	  </React.Fragment>
 	);
 }
 

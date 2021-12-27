@@ -1,5 +1,7 @@
 # Express-React Scaffold
 
+node v-12.18.4
+
 ### This is a basic Node-React Application Scaffold for streamlining project setup.
 
 #### Env setup

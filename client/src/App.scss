@@ -1,3 +1,27 @@
+// Colors
+//base bg
+$base: #131312;
+$darkash: #21211F;
+$base-brown: #702B19;
+$midnight: #09172D;
+
+//Primary
+$primary: #90F1C4;
+
+//Secondary
+$secondary: #F8BA42;
+
+//Accents
+$danger: #d82340;
+
+// Base
+$body-bg: $base;
+$body-color: $primary;
+$light: $darkash;
+
+@import "assets/scss/main.scss";
+@import "../node_modules/bootstrap/scss/bootstrap";
+
 .btn-custom {
   background-color: transparent;
 }
@@ -8,10 +32,5 @@
 
 .auth-nav{
   margin-left: 20px;
-}
-
-.nav-item .nav-link.active {
-  color: red;
-  border-bottom: 1px solid #555;
 }
 
