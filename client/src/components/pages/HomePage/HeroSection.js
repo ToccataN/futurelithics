@@ -9,7 +9,7 @@ const HeroSection = () => {
 				<div className="row justify-content-between">
 					<div className="col-md-6 text-secondary">
 						<div className="">
-							Hello!
+							Hello! Ruh roh!!!
 						</div>
 					</div>
 					<div className="col-md-6 text-primary">
