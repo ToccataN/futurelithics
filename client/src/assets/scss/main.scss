@@ -27,3 +27,14 @@ a {
 	width: 225px
 }
 
+.hero-card {
+	background-color: $fineash;
+	max-width: 325px;
+	height: auto;
+	flex: 1;
+	border-radius: 33px;
+}
+
+	.spaced-bottom{
+		margin-bottom: 20px !important;
+	}

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { NavbarBrand, Navbar, Nav, NavItem } from 'reactstrap'
 import { connect } from "react-redux";
 
-import { basicRoutes } from '../../routes';
+import { mainRoutes } from '../../routes';
 
 import ModalContainer from '../modals/ModalContainer';
 import NonAuthHeader from './navigation/NonAuthHeader';
@@ -29,7 +29,7 @@ const Header = (props) => {
 		  		<img src={Logo1} alt="Future Lithics" />
 		  	</NavbarBrand>
 		  	<Nav className="flex-row me-auto">
-		  		{basicRoutes.map((route) => {
+		  		{mainRoutes.card.map((route) => {
 		  			return (
 		  				<NavItem key={`nav-link-${route.name}`} className="mr-2 px-2">
 		  					<NavLink exact to={route.path} className="nav-link link-primary">
