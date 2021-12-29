@@ -1,3 +1,5 @@
+@import './animations.scss';
+
 .nav-item .nav-link.active {
   color: $secondary;
   border-bottom: 1px solid $secondary;
@@ -19,11 +21,105 @@ a {
 	background: radial-gradient(circle at 73% 50%, $base-brown, $base-brown 1%,$midnight 50%, $midnight 90%)
 }
 
-.hero-image {
+.hero-image-container{
+	width: 100%;
+	max-width: 100%;
+
+	.hero-image {
+		max-width: 100%;
+	}	
+}
+
+.hero-image-absolute {
 	max-width: 100%;
 }
 
 .navbar-brand img {
 	width: 225px
 }
+
+.hero-card {
+	background-color: $fineash;
+	max-width: 325px;
+	height: auto;
+	flex: 1;
+	border-radius: 33px;
+}
+
+.btn.cta-button {
+	background-color: $primary_data;
+	width: 90%;
+	margin: 0 auto;
+}
+
+.text-primary-data{
+	color: $primary_data;
+}
+
+.custom-node-bg {
+	position: relative;
+	background-color: $darkash;
+	height: auto;
+	padding-bottom: 5%;
+	z-index: 0
+}
+
+.transition-layer-node {
+	position: absolute;
+	display: flex;
+	justify-content: center;
+	align-content: center;
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+	z-index: -1
+}
+
+.transition-layer-node img{
+	position: relative;
+	margin: auto;
+	@include animation('translate-bg 360s linear 1');
+	height: 75%;
+	width: 75%;
+}
+
+.service-card{
+	background-color: $base_layer;
+	border-radius: 20px;
+	width: 100%;
+	max-width: 360px;
+
+	.service-card-inner {
+		background-color: $darkash;
+		border-radius: 10px;
+		height: 98%;
+		display: flex;
+		flex-flow: column;
+
+		.image-container {
+			overflow: hidden;
+			text-align: center;
+			position: relative;
+			width: 100%;
+			min-height: 150px;
+			border-top-left-radius: 10px;
+			border-top-right-radius: 10px;
+			border-bottom: 2px solid $secondary;
+
+			img {
+				position: absolute;
+				top: 0;
+				left: 0;
+				min-width: 100%;
+			}
+		}
+
+		.description {
+			background-color: $base_layer;
+			border-radius: 10px;
+			flex: 1;
+		}
+	}
+}
+
 

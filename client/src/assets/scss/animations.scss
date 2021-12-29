@@ -1,0 +1,66 @@
+@mixin keyframes($animation_name) {
+  @-webkit-keyframes #{$animation_name} {
+    @content;
+  }
+  @-moz-keyframes #{$animation_name} {
+    @content;
+  }  
+  @-ms-keyframes #{$animation_name} {
+    @content;
+  }
+  @-o-keyframes #{$animation_name} {
+    @content;
+  }  
+  @keyframes #{$animation_name} {
+    @content;
+  }
+}
+
+@mixin animation($str) {
+  -webkit-animation: #{$str};
+  -moz-animation: #{$str};
+  -ms-animation: #{$str};
+  -o-animation: #{$str};
+  animation: #{$str};      
+}
+
+@include keyframes(spin-enlarge) {
+  from { 
+    width: 0%;
+    height: 0%;
+    transform: rotate(-360deg);
+  }
+  to { 
+    width: 75%;
+    height: 75%;
+    transform: rotate(360deg);
+  }
+}
+
+@include keyframes(translate-bg) {
+  0% { 
+    width: 0%;
+    height: 0%;
+    transform: rotate(-360deg);
+  }
+  1% { 
+    width: 75%;
+    height: 75%;
+    transform: rotate(360deg);
+  }
+  20% { 
+    transform: translate(-20%,0)rotate(270deg);
+  }
+  40% { 
+    transform: translate(20%,-20%)rotate(180deg);
+  }
+  60% { 
+    transform: translate(20%,0)rotate(270deg);
+  }
+  80% { 
+    transform: translate(20%,20%)rotate(360deg);
+  }
+  80% { 
+    transform: translate(0,0)rotate(390deg);
+  }
+}

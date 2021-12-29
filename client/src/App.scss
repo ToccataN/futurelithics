@@ -2,14 +2,19 @@
 //base bg
 $base: #131312;
 $darkash: #21211F;
+$fineash: #48464155;
 $base-brown: #702B19;
 $midnight: #09172D;
 
 //Primary
 $primary: #90F1C4;
+$primary_data:#25DD87;
 
 //Secondary
 $secondary: #F8BA42;
+
+//warning
+$warning: $base-brown;
 
 //Accents
 $danger: #d82340;
@@ -18,6 +23,9 @@ $danger: #d82340;
 $body-bg: $base;
 $body-color: $primary;
 $light: $darkash;
+
+// layer
+$base_layer: #13131277;
 
 @import "assets/scss/main.scss";
 @import "../node_modules/bootstrap/scss/bootstrap";
@@ -33,4 +41,3 @@ $light: $darkash;
 .auth-nav{
   margin-left: 20px;
 }
-

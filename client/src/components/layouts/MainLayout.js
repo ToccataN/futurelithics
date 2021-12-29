@@ -1,20 +1,24 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-import { basicRoutes } from '../../routes';
+import { mainRoutes } from '../../routes';
 
 import Header from './Header'
 
+const routeParser = (routes) => {
+	return routes.map((route) =>{
+		return <Route exact key={route.name} {...route} />
+	})
+}
 
 const MainLayout = () => {
+
 	return (
 	  <React.Fragment>
 	    <Router>
 	      <Header />
 	      <Switch>
-			  	{basicRoutes.map((route) => {
-			  		return <Route exact key={route.name} {...route} />
-			  	})}
+			  	{routeParser(mainRoutes.basic)}
 	  	  </Switch>
 	  	</Router>
 	  </React.Fragment>
