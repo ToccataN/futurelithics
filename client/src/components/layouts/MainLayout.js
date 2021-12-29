@@ -7,9 +7,6 @@ import Header from './Header'
 
 const routeParser = (routes) => {
 	return routes.map((route) =>{
-		if (route.children) {
-			routeParser(route.children);
-		}
 		return <Route exact key={route.name} {...route} />
 	})
 }
@@ -22,7 +19,6 @@ const MainLayout = () => {
 	      <Header />
 	      <Switch>
 			  	{routeParser(mainRoutes.basic)}
-			  	{routeParser(mainRoutes.card)}
 	  	  </Switch>
 	  	</Router>
 	  </React.Fragment>
