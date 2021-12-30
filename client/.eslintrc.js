@@ -18,6 +18,7 @@ module.exports = {
     "react"
   ],
   "rules": {
-    "no-mixed-spaces-and-tabs": 1
+    "no-mixed-spaces-and-tabs": 1,
+    "no-unused-vars": 1
   }
 };
