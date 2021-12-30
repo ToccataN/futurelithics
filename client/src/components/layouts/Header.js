@@ -28,17 +28,6 @@ const Header = (props) => {
 		  	<NavbarBrand href={'/'}>
 		  		<img src={Logo1} alt="Future Lithics" />
 		  	</NavbarBrand>
-		  	<Nav className="flex-row me-auto">
-		  		{mainRoutes.cards.map((route) => {
-		  			return (
-		  				<NavItem key={`nav-link-${route.name}`} className="mr-2 px-2">
-		  					<NavLink exact to={route.path} className="nav-link link-primary">
-		  						{route.niceName}
-		  					</NavLink>
-		  				</NavItem>
-		  			);
-		  		})}
-        </Nav>
         { props.auth.isAuthenticated ? <AuthHeader /> : <NonAuthHeader toggler={toggleModal} /> }
 		  </Navbar>
 		  <ModalContainer modalOpen={modalOpen} setModalOpen={setModalOpen} type={modalType} />

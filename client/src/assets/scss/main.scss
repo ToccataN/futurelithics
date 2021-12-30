@@ -7,6 +7,7 @@
 
 a {
   color: $primary;
+  text-decoration: none !important;
 }
 
 .modal-content {
@@ -15,6 +16,7 @@ a {
 
 .header {
   background-color: $darkash;
+  border-bottom: 2px solid $fineash;
 }
 
 .custom-radial-bg {
@@ -56,7 +58,7 @@ a {
 	color: $primary_data;
 }
 
-.custom-node-bg {
+.custom-layer-bg {
 	position: relative;
 	background-color: $darkash;
 	height: auto;
@@ -122,4 +124,8 @@ a {
 	}
 }
 
+.footer {
+  background-color: $darkash;
+  border-top: 2px solid $fineash;
+}
 
