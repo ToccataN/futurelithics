@@ -18,8 +18,12 @@ module.exports = {
   "production": {
     "use_env_variable": 'DATABASE_URL',
     ssl: true,
+    logging: true,
     dialectOptions: {
-      ssl: true,
-    },
+      ssl: {
+        require: true,
+        rejectUnauthorized: false
+      }
+    }
   }
 }
