@@ -7,8 +7,14 @@ var passport = require("passport");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
-var cors = require("cors");
 var app = express();
+
+
+if (process.env.NODE_ENV != 'production'){
+  var cors = require("cors");
+  app.use(cors());  
+}
+
 
 var sequelize = require("./db/models/index.js");
 
@@ -23,7 +29,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.use(cors());
+
 
 app.use(express.static(path.join(__dirname, './client/build')));
 
