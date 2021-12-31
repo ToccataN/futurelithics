@@ -6,7 +6,6 @@ module.exports = function(app) {
     '/api',
     createProxyMiddleware({
       target: api_url,
-      pathRewrite: {'^/api' : ''},
       changeOrigin: true,
     })
   );
