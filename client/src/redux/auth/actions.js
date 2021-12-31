@@ -28,6 +28,7 @@ export const loginUser = (creds) => (dispatch) => {
   return fetch("/api/users/login", {
     method: "POST",
     headers: {
+      'Accept': 'application/json, text/plain, */*',
       "Content-Type": "application/json",
     },
     body: JSON.stringify(creds),
@@ -67,9 +68,10 @@ export const registerUser = (creds) => (dispatch) =>  {
   const { username } = creds;
   dispatch(requestRegister(username));
 
-  return fetch(api_url + "/api/users/register", {
+  return fetch("/api/users/register", {
     method: "POST",
     headers: {
+      'Accept': 'application/json, text/plain, */*',
       "Content-Type": "application/json",
     },
     body: JSON.stringify(creds),
