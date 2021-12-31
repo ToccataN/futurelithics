@@ -51,6 +51,7 @@ router.post("/register", function (req, res, next) {
 });
 
 router.post("/login", function (req, res, next) {
+  console.log(req.body, "BODY!!!")
   const { username, password } = req.body;
   model.User.findOne({
     where: {
@@ -58,6 +59,7 @@ router.post("/login", function (req, res, next) {
     },
   })
     .then((user) => {
+      console.log(user, "USER!!!")
       res.setHeader("Content-Type", "application/json");
       res.statusCode = 401;
       if (!user) {
@@ -74,6 +76,7 @@ router.post("/login", function (req, res, next) {
       } else {
         const userObject = user.toJSON();
         let token = authenticate.getToken(userObject);
+        console.log(token, "TOKEN!!!")
         let responseObject = {
           id: userObject.id,
           username: userObject.name,
