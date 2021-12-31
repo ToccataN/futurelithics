@@ -25,8 +25,7 @@ export const failedLogin = (response) => {
 export const loginUser = (creds) => (dispatch) => {
   const user = { username: creds.username };
   dispatch(requestLogin(user));
-
-  return fetch("" + api_url + "users/login", {
+  return fetch("/api/users/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -68,7 +67,7 @@ export const registerUser = (creds) => (dispatch) =>  {
   const { username } = creds;
   dispatch(requestRegister(username));
 
-  return fetch(api_url + "users/register", {
+  return fetch(api_url + "/api/users/register", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
