@@ -10,7 +10,7 @@ var usersRouter = require("./routes/users");
 var app = express();
 
 
-if (process.env.NODE_ENV != 'production'){
+if (true){
   var cors = require("cors");
   app.use(cors());  
 }
