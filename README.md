@@ -9,7 +9,7 @@ node v-12.18.4
 - yarn install
 
 ```
-CONNECTION_STRING=postgres://postgres:password@host:port/db_name
+DATABASE_URL=postgres://postgres:password@host:port/db_name
 DB_USE_SSL=false
 secretOrKey=1234xxxx
 DB_HOST=host
@@ -24,6 +24,10 @@ DB_USERNAME=username
 ##### Contains User model with basic JWT authentication strategy
 
 ###### Set up instructions:
+
+- heroku config:set PGSSLMODE=require --remote <remote_name>
+
+- heroku run npx sequelize-cli db:seed:all
 
 - Run migrations: `npx sequelize-cli db:migrate`
 
