@@ -12,7 +12,7 @@ const ServiceSection = () => {
 		  	<img src={NodeGraphic2} /> 
 		  </div>
 		  <h3 className="py-4 text-center text-primary-data">Services</h3>
-		  <div className="container p-y w-100 row justify-content-between mx-auto">
+		  <div className="container w-100 row justify-content-between mx-auto">
 		  	{
 		  		mainRoutes.cards.map((route) => {
 		  			return <ServiceCard card={route} key={route.name} />
