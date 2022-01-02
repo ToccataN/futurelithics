@@ -42,9 +42,10 @@ const ContactSection = () => {
 
 	return (
 		<div className="contact-section py-4">
+		  <a name="contact-section"></a>
 			<div className="container py-4">
-				<div className="row justify-content-around text-secondary">
-					<div className="section col-md-5 py-4 px-3">
+				<div className="row flex-sm-inline flex-xs-column justify-content-around align-content-around text-secondary">
+					<div className="section col-md-5 py-4 px-3 mt-4">
 						<h3 className="mb-4">Schedule a Consultation</h3>
 						<p className="mb-2" >
 							Future Lithics <br />
@@ -60,7 +61,7 @@ const ContactSection = () => {
 							 if you are a local, independent business in upstate South Carolina. Please contact me for a direct contract. 
 						</p>
 					</div>
-					<div className="section col-md-5 py-4 px-3 ">
+					<div className="section col-md-5 py-4 px-3 mt-4">
 						<ContactForm />
 					</div>
 				</div>

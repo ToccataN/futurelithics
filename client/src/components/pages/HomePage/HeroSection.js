@@ -16,7 +16,7 @@ const HeroSection = () => {
 									Look through services offered below, or schedule a consultation if you require a custom solution.
 								</h6>
 							</div>
-							<CTAButton url="#" innerText="Schedule Consultation" />
+							<CTAButton url="#contact-section" innerText="Schedule Consultation" />
 						</div>
 					</div>
 					<div className="d-sm-none d-none d-md-flex col-md-6 text-primary-data flex-column justify-content-center">
