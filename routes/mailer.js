@@ -14,16 +14,14 @@ router.post("/contact-me", function (req, res, next) {
 
   const mail = {
     from,
-    to: process.env.EMAIL,
+    to: process.env.MAILER_EMAIL,
     subject: "Contact from FutureLithics",
     text: `${from} \n ${message}`,
   };
 
-  console.log(mail)
-
   transporter.sendMail(mail, (err, data) => {
     if(err) {
-      consolelog(err, "error")
+      console.log(err, "error")
       res.status(500).send(err);
     } else {
       res.status(200).send('mail successfully sent!')
