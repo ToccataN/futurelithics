@@ -39,25 +39,15 @@
 
 @include keyframes(translate-bg) {
   0% { 
-    width: 0%;
-    height: 0%;
-    transform: rotate(-360deg);
-  }
-  1% { 
-    width: 75%;
-    height: 75%;
-    transform: rotate(360deg);
-  }
-  20% { 
     transform: translate(-20%,0)rotate(270deg);
   }
-  40% { 
+  20% { 
     transform: translate(20%,-20%)rotate(180deg);
   }
-  60% { 
+  40% { 
     transform: translate(20%,0)rotate(270deg);
   }
-  80% { 
+  60% { 
     transform: translate(20%,20%)rotate(360deg);
   }
   80% { 
