@@ -1,6 +1,7 @@
 import React from 'react';
 
 import CircuitLogo1 from '../../../assets/images/CircuitLogo1.svg';
+import CTAButton from '../../shared/CTAButton';
 
 const HeroSection = () => {
 	return (
@@ -15,7 +16,7 @@ const HeroSection = () => {
 									Look through services offered below, or schedule a consultation if you require a custom solution.
 								</h6>
 							</div>
-							<a href="#" className="btn cta-button"><strong className="text-warning">Schedule Consultation</strong></a>
+							<CTAButton url="#" innerText="Schedule Consultation" />
 						</div>
 					</div>
 					<div className="d-sm-none d-none d-md-flex col-md-6 text-primary-data flex-column justify-content-center">

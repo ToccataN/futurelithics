@@ -8,11 +8,11 @@ const ServicePage = (props) => {
 	const { routes, info, history } = props;
 
 	return (
-		<div className="custom-layer-bg">
+		<div className="custom-layer-bg service-page">
 			<div className="container pt-4">
-				<div className="subheader py-4 mb-4 text-center mx-auto w-50">
+				<div className="subheader p-4 mb-4 text-center mx-auto w-75">
 				  <h2 className="mb-3 text-center text-primary-data">{info.title}</h2>		  
-				  <p className="text-secondary"><strong>{info.description}!!!</strong></p>
+				  <p><strong>{info.description}</strong></p>
 			  </div>				
 			</div>
 

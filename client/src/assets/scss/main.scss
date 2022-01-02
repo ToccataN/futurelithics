@@ -34,6 +34,7 @@ a {
 
 .hero-image-absolute {
 	max-width: 100%;
+	opacity: 25%;
 }
 
 .navbar-brand img {
@@ -85,6 +86,13 @@ a {
 	width: 75%;
 }
 
+.service-page {
+	.subheader {
+		background-color: $base_layer;
+		border-radius: 10px;
+	}
+}
+
 .service-card{
 	background-color: $base_layer;
 	border-radius: 20px;
@@ -121,6 +129,16 @@ a {
 			border-radius: 10px;
 			flex: 1;
 		}
+	}
+}
+
+.contact-section {
+	background: linear-gradient(to right, $base-brown 0%, $midnight 60%, $midnight 100% );
+	height: 90vh;
+
+	.section {
+		background-color: $base_layer;
+		border-radius: 10px;
 	}
 }
 

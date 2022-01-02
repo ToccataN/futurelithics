@@ -7,6 +7,7 @@ var passport = require("passport");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
+var mailerRouter = require("./routes/mailer");
 var app = express();
 
 
@@ -37,6 +38,7 @@ if(process.env.NODE_ENV === 'production'){
 
 app.use("/", indexRouter);
 app.use("/api/users", usersRouter);
+app.use("/api/mailer", mailerRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

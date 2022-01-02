@@ -44,3 +44,33 @@ $base_layer: #13131277;
 .auth-nav{
   margin-left: 20px;
 }
+
+.text-underline{
+  text-decoration: underline !important;
+}
+
+.small-text {
+  font-size: clamp(0.3em, 1vw, 0.6em);
+}
+
+.large-top-margin {
+  margin-top: 7em;
+}
+
+.form-control, 
+.form-control:focus,
+.focus-visible,
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  color: $primary !important;
+  background-color: $base !important;
+  transition: background-color 600000s 0s, color 600000s 0s;
+}
+
+textarea {
+  resize: none;
+}
+
+
