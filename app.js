@@ -7,6 +7,7 @@ var passport = require("passport");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
+var mailerRouter = require("./routes/mailer");
 var app = express();
 
 
@@ -30,11 +31,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 
+if(process.env.NODE_ENV === 'production'){
+  app.use(express.static(path.join(__dirname, './client/build')));
+}
 
-app.use(express.static(path.join(__dirname, './client/build')));
 
 app.use("/", indexRouter);
 app.use("/api/users", usersRouter);
+app.use("/api/mailer", mailerRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

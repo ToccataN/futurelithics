@@ -4,13 +4,13 @@ import PropTypes from 'prop-types';
 import ServiceCard from '../../components/shared/ServiceCard';
 
 const ServicePage = (props) => {
-	console.log(props, "servicePage propS!!!");
+	console.log(props, "servicePage pr!");
 	const { routes, info, history } = props;
 
 	return (
-		<div className="custom-layer-bg">
+		<div className="custom-layer-bg service-page">
 			<div className="container pt-4">
-				<div className="subheader py-4 mb-4 text-center mx-auto w-50">
+				<div className="subheader p-4 mb-4 text-center mx-auto w-75">
 				  <h2 className="mb-3 text-center text-primary-data">{info.title}</h2>		  
 				  <p><strong>{info.description}</strong></p>
 			  </div>				
