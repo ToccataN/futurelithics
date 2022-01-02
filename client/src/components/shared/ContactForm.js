@@ -98,7 +98,7 @@ let ContactForm = () => {
                 </div>
               )}
           </Field>  
-        <div className="p-4 text-center">
+        <div className="text-center">
           <button className="btn cta-button d-inline-block w-auto" type="submit" disabled={disableSubmit}>
             <strong className="text-warning">Submit</strong>
           </button>        
