@@ -250,3 +250,8 @@ a {
 	@include animation('rotate-down 0.6s ease 1 0s forwards');
 }
 
+.preprocess-image {
+	max-height: 200px;
+	width: auto;
+}
+

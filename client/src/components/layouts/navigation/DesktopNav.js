@@ -21,7 +21,7 @@ const RecursiveDropdown = (props) => {
       	  <Link to={route.path} className="flex-grow text-end w-100">{route.title}</Link>
 	      </div>
       </DropdownToggle>
-      <DropdownMenu className="py-2" left="true">
+      <DropdownMenu className="py-2 desktop-sub-nav-menu" left="true">
       	{
       		route.routes.map((route, i) => {
       			if(route.routes){
