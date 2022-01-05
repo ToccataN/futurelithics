@@ -25,7 +25,7 @@ const RecursiveAccordion = (props) => {
 
 	return (
 	  <div className="mobile-nav-body-container">
-		{
+		{ 
 			routes.map((route, i) => {
 				if(route.routes && route.level < 4){
 					return (
