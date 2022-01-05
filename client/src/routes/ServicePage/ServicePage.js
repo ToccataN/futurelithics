@@ -10,7 +10,7 @@ const ServicePage = (props) => {
 	return (
 		<div className="custom-layer-bg service-page">
 			<div className="container pt-4">
-				<div className="subheader p-4 mb-4 text-center mx-auto w-75">
+				<div className="subheader p-4 mb-4 text-center mx-auto w-sm-75 w-xs-100">
 				  <h2 className="mb-3 text-center text-primary-data">{info.title}</h2>		  
 				  <p><strong>{info.description}</strong></p>
 			  </div>				
