@@ -31,14 +31,15 @@ a {
 }
 
 .desktop-toggle.btn-secondary,
-.mobile-toggle.btn-secondary {
+.mobile-toggle.btn-secondary,
+.desktop-toggle.btn-secondary:focus, {
 	color: $primary;
 	background-color: $darkash;
 	border: 1px solid $primary;
 }
 
 .desktop-toggle.btn-secondary:hover,
-.desktop-toggle.btn-secondary:focus,
+.desktop-toggle.btn-secondary.focused
 .mobile-toggle.btn-secondary:hover,
 .mobile-toggle.btn-secondary:focus  {
 	color: $darkash;
@@ -76,6 +77,7 @@ a {
 .sub-item-link,
 .item-link {
 	font-size: 0.7em;
+	min-width: 100%;
 }
 
 .desktop-sub-nav .desktop-toggle-sub.btn-secondary:hover a,

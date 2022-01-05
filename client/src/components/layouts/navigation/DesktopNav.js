@@ -46,9 +46,11 @@ const RecursiveDropdown = (props) => {
       				return <RecursiveDropdown route={route} key={route.name} />
       			} else {
       				return (
-      					<DropdownItem key={route.name}>
-      					  <Link to={{pathname: route.path}} target={route.type == 'external' ? "_balnk" : ""} className="flex-grow text-end w-100 sub-item-link">{route.title}</Link>
-      				  </DropdownItem>
+      					<Link to={{pathname: route.path}} target={route.type == 'external' ? "_balnk" : ""} className="flex-grow text-end mw-100 sub-item-link">
+	      					<DropdownItem key={route.name}>
+	      					  {route.title}
+	      				  </DropdownItem>
+      				  </Link>
       				)
       			}
       		})
@@ -72,8 +74,8 @@ const DesktopNav = (props) => {
 
  return (
  	<div className="d-none d-md-block">
-    <ButtonDropdown className="desktop-nav" isOpen={open} onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)} nav={true}>
-      <DropdownToggle caret={false} className="desktop-toggle" >
+    <ButtonDropdown className={`desktop-nav`} isOpen={open} toggle={toggle} onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)} nav={true}>
+      <DropdownToggle caret={false} className={`desktop-toggle ${open ? "focused" : ""}`} >
       	<FontAwesomeIcon icon={faBars}  />
       </DropdownToggle>
       <DropdownMenu className="py-4" right>
@@ -84,9 +86,11 @@ const DesktopNav = (props) => {
       				return <RecursiveDropdown route={route} key={route.name} />
       			} else {
       				return (
-      				  <DropdownItem key={route.name} className='item-link p-2'>
-      					  <Link to={{pathname: route.path}} className="flex-grow text-end w-100">{route.title}</Link>
-      				  </DropdownItem>
+      					<Link to={{pathname: route.path}} className="flex-grow text-end mw-100 item-link">
+	      				  <DropdownItem key={route.name} className='p-2'>
+	      					  {route.title}
+	      				  </DropdownItem>
+      				  </Link>
       				)
       			}
       		})
