@@ -55,15 +55,17 @@ a {
 	min-width: 100%;
 }
 
-.desktop-sub-nav .desktop-toggle-sub.btn-secondary{ 
+.desktop-sub-nav .desktop-toggle-sub.btn-secondary,
+.item-link,
+{ 
 	background-color: $base;
 	color: $primary;
 	border: none;
-	border-bottom: 1px solid $fineash;
 	border-radius: 0px !important;
 }
 
-.desktop-sub-nav .desktop-toggle-sub.btn-secondary:hover{ 
+.desktop-sub-nav .desktop-toggle-sub.btn-secondary:hover,
+.item-link:hover { 
 	background-color: $primary;
 	color: $base ;
 	border: none;
@@ -71,13 +73,22 @@ a {
 }
 
 .desktop-sub-nav .desktop-toggle-sub.btn-secondary a,
-.sub-item-link {
+.sub-item-link,
+.item-link {
 	font-size: 0.7em;
 }
 
 .desktop-sub-nav .desktop-toggle-sub.btn-secondary:hover a,
 .desktop-sub-nav .dropdown-item a:hover {
   color: $base ;
+}
+
+.dropdown-item, .desktop-toggle-sub {
+	border-top: 1px solid $fineash !important;
+}
+
+.menu-inner {
+	border-bottom: 1px solid $fineash !important;
 }
 
 .desktop-sub-nav .icon {
