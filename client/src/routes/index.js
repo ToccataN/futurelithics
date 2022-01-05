@@ -3,7 +3,7 @@ import ServicePage from './ServicePage';
 
 import phImage from "../assets/images/binary-code-image.png"
 import uiUxStock from "../assets/images/stock-ui-ux.png"
-import railsLogo from "../assets/images/RailsLogo.png"
+import railsLogo from "../assets/images/RailsLogo.jpg"
 import analyticStock from "../assets/images/analytics-stock.jpg"
 import wordpressStock from "../assets/images/wordpress-stock.jpg"
 import futureLithicImage from "../assets/images/FutureLithic-Node.jpg"
@@ -71,7 +71,7 @@ const cardRoutes = [
         },
         description: 'This site is built using a Node/Express server with a React.js front end, and a Postgres DB using the Sequelize ORM.',
         path: "/",
-        type: "active",
+        type: "inactive",
         level: 2,        
       },
       {

@@ -18,22 +18,49 @@ const iconClass = (card, routeName) => {
 	}
 }
 
+const routeFilter = (route) => {
+	if(route.routes){
+		const routes = route.routes;
+		const filteredRoutes = routes.filter((r) => {
+			return r.type === 'active' || r.type === 'external';
+		});
+		if(filteredRoutes.length > 0){
+			return true;
+		} else {
+			return false;
+		}
+	} else {
+		return false;
+	}
+}
+
 const RecursiveAccordion = (props) => {
 	const { routes } = props;
 
 	const [card, setCard] = useState(null);
 
+	const toggle = (name) => {
+		if(card === name) {
+			setCard(null);
+		} else {
+			setCard(name)
+		}
+	}
+
 	return (
 	  <div className="mobile-nav-body-container">
 		{ 
 			routes.map((route, i) => {
-				if(route.routes && route.level < 4){
+				if(routeFilter(route)){
 					return (
 						<Card key={route.name}>
-							<CardHeader onClick={() => setCard(route.name)} className="d-flex justify-content-between align-items-center pe-4">
-					       <h6 style={{paddingLeft: `${10 * (route.level - 1)}px` }}>
-					         <Link to={route.path} className="flex-grow text-end w-100">{route.title}</Link>
-					       </h6> 
+						  
+							<CardHeader onClick={() => toggle(route.name)} className="d-flex justify-content-between align-items-center pe-4">
+					       <Link to={{pathname: route.path}}  target={route.type == 'external' ? "_balnk" : ""}  className="flex-grow text-end mw-100">
+						       <h6 style={{paddingLeft: `${10 * (route.level - 1)}px` }} className="text-start">
+						         {route.title}
+						       </h6> 
+					       </Link>
 					       <FontAwesomeIcon icon={ faAngleDown } className={iconClass(card, route.name)}  />
 					    </CardHeader>
 					    <Collapse isOpen={card === route.name ? true : false}>
@@ -45,9 +72,11 @@ const RecursiveAccordion = (props) => {
 					return (
 						<Card key={route.name}>
 							<CardHeader>
-					        <h6 style={{paddingLeft: `${10 * (route.level - 1)}px` }}>
-					          <Link to={route.path} className="flex-grow text-end w-100">{route.title}</Link>
+							  <Link to={{pathname: route.path}}  target={route.type == 'external' ? "_balnk" : ""}  className="flex-grow text-end mw-100">
+					        <h6 style={{paddingLeft: `${10 * (route.level - 1)}px` }} className="text-start">
+					          {route.title}
 					        </h6>
+					      </Link>
 					    </CardHeader>
 						</Card>
 					)					
