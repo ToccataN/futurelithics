@@ -14,11 +14,106 @@ a {
   background-color: $darkash !important;
 }
 
+/* Main Header */
 .header {
   background-color: $darkash;
   border-bottom: 2px solid $fineash;
 }
 
+.desktop-nav .dropdown-menu,.desktop-nav .dropdown-menu .dropdown-item{
+	background-color: $base;
+	color: $primary;
+}
+
+.desktop-nav .dropdown-menu .dropdown-item:hover {
+	background-color: $primary;
+	color: $base;
+}
+
+.desktop-toggle.btn-secondary,
+.mobile-toggle.btn-secondary {
+	color: $primary;
+	background-color: $darkash;
+	border: 1px solid $primary;
+}
+
+.desktop-toggle.btn-secondary:hover,
+.desktop-toggle.btn-secondary:focus,
+.mobile-toggle.btn-secondary:hover,
+.mobile-toggle.btn-secondary:focus  {
+	color: $darkash;
+	background-color: $primary;
+	border: 1px solid $darkash;
+}
+
+.desktop-toggle.btn-secondary:focus,
+.mobile-toggle.btn-secondary:focus {
+	box-shadow: none;
+}
+
+.desktop-sub-nav, .desktop-sub-nav button.desktop-toggle{
+	min-width: 100%;
+}
+
+.desktop-sub-nav .desktop-toggle-sub.btn-secondary{ 
+	background-color: $base;
+	color: $primary;
+	border: none;
+	border-bottom: 1px solid $fineash;
+	border-radius: 0px !important;
+}
+
+.desktop-sub-nav .desktop-toggle-sub.btn-secondary:hover{ 
+	background-color: $primary;
+	color: $base ;
+	border: none;
+	border-bottom: 1px solid $fineash;
+}
+
+.desktop-sub-nav .desktop-toggle-sub.btn-secondary a,
+.sub-item-link {
+	font-size: 0.7em;
+}
+
+.desktop-sub-nav .desktop-toggle-sub.btn-secondary:hover a,
+.desktop-sub-nav .dropdown-item a:hover {
+  color: $base ;
+}
+
+.desktop-sub-nav .icon {
+	font-size: 12px;
+}
+
+.mobile-nav {
+	position: relative;
+}
+
+.mobile-nav-body {
+	position: absolute;
+	top: 3.5em;
+	right: -0.75rem;
+	background-color: $darkash;
+	border-top: 1px solid $fineash;
+
+	.mobile-nav-body-container{
+		position: relative;
+	  background-color: $darkash;
+	  min-width: 100vw;
+	  z-index: 100000;
+	  .card-header {
+	    background-color: $darkash;
+	    h6 {
+	    	font-size: 12px;
+	    }
+	    .icon {
+	    	font-size: 20px;
+	    	margin-right: 0.15em;
+	    }
+	  }
+	}
+}
+
+/* Hero Section */
 .custom-radial-bg {
 	background: radial-gradient(circle at 73% 50%, $base-brown, $base-brown 1%,$midnight 50%, $midnight 90%)
 }
@@ -134,7 +229,7 @@ a {
 }
 
 .contact-section {
-	background: linear-gradient(to right, $base-brown 0%, $midnight 60%, $midnight 100% );
+	background: linear-gradient(to bottom right, $base-brown 0%, $midnight 80%, $midnight 100% );
 
 	.section {
 		background-color: $base_layer;
@@ -145,5 +240,13 @@ a {
 .footer {
   background-color: $darkash;
   border-top: 2px solid $fineash;
+}
+
+.rotate-up {
+	@include animation('rotate-up 0.6s ease 1 0s forwards');
+}
+
+.rotate-down {
+	@include animation('rotate-down 0.6s ease 1 0s forwards');
 }
 

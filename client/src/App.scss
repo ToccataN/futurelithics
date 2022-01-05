@@ -73,4 +73,19 @@ textarea {
   resize: none;
 }
 
+.btn-group > .btn:not(:last-child):not(.dropdown-toggle), .btn-group > .btn-group:not(:last-child) > .btn{
+  border-top-right-radius: unset;
+  border-bottom-right-radius: unset;
+  border-radius: 5px;
+}
+
+
+.card {
+  background-color: $base;
+  border: none;
+}
+
+.card-header {
+  border-bottom: 1px solid $fineash;
+}
 
