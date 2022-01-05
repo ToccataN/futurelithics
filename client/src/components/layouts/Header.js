@@ -3,12 +3,12 @@ import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { NavbarBrand, Navbar, Nav, NavItem } from 'reactstrap'
 import { connect } from "react-redux";
+import DesktopNav from './navigation/DesktopNav';
+import MobileNav from './navigation/MobileNav';
 
 import { mainRoutes } from '../../routes';
 
 import ModalContainer from '../modals/ModalContainer';
-import NonAuthHeader from './navigation/NonAuthHeader';
-import AuthHeader from './navigation/AuthHeader';
 
 import Logo1 from '../../assets/images/Logo1.svg';
 
@@ -28,7 +28,9 @@ const Header = (props) => {
 		  	<NavbarBrand href={'/'}>
 		  		<img src={Logo1} alt="Future Lithics" />
 		  	</NavbarBrand>
-        { props.auth.isAuthenticated ? <AuthHeader /> : <NonAuthHeader toggler={toggleModal} /> }
+        {/* props.auth.isAuthenticated ? <AuthHeader /> : <NonAuthHeader toggler={toggleModal} /> */}
+        <DesktopNav routes={mainRoutes.cards} />
+        <MobileNav routes={mainRoutes.cards} />
 		  </Navbar>
 		  <ModalContainer modalOpen={modalOpen} setModalOpen={setModalOpen} type={modalType} />
 		</div>
