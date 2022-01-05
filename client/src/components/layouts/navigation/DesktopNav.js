@@ -29,7 +29,7 @@ const RecursiveDropdown = (props) => {
       			} else {
       				return (
       					<DropdownItem key={route.name}>
-      					  <Link to={route.path} className="flex-grow text-end w-100 sub-item-link">{route.title}</Link>
+      					  <Link to={{pathname: route.path}} target={route.type == 'external' ? "_balnk" : ""} className="flex-grow text-end w-100 sub-item-link">{route.title}</Link>
       				  </DropdownItem>
       				)
       			}
@@ -64,7 +64,7 @@ const DesktopNav = (props) => {
       				return <RecursiveDropdown route={route} key={route.name} />
       			} else {
       				<DropdownItem key={route.name}>
-      					<Link to={route.path} className="flex-grow text-end w-100">{route.title}</Link>
+      					<Link to={{pathname: route.path}} className="flex-grow text-end w-100">{route.title}</Link>
       				</DropdownItem>
       			}
       		})
