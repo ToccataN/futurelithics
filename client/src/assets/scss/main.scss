@@ -18,6 +18,10 @@ a {
 .header {
   background-color: $darkash;
   border-bottom: 2px solid $fineash;
+  position: fixed;
+  top: 0px;
+  width: 100vw;
+  z-index: 100000;
 }
 
 .desktop-nav .dropdown-menu,.desktop-nav .dropdown-menu .dropdown-item{
@@ -118,7 +122,7 @@ a {
 		position: relative;
 	  background-color: $darkash;
 	  min-width: 100vw;
-	  z-index: 100000;
+	  z-index: 10000;
 	  .card-header {
 	    background-color: $darkash;
 	    h6 {

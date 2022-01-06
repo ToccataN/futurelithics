@@ -24,7 +24,22 @@ const routeParser = (routes) => {
 	})
 }
 
+const flattenRoutes = (routes) => {
+	let acc = [];
+	for(let r = 0; r < routes.length; r++) {
+		const route = routes[r];
+		if (route.type == 'active') {
+			acc.push(route);
+		}
+		if(route.routes && route.routes.length > 0){
+			acc = acc.concat(flattenRoutes(route.routes));
+		}
+	}
+	return acc;
+}
+
 const MainLayout = () => {
+	const cards = flattenRoutes(mainRoutes.cards);
 
 	return (
 	  <React.Fragment>
@@ -34,9 +49,10 @@ const MainLayout = () => {
 	      <Switch>
 			  	{routeParser(mainRoutes.basic)}
 			  	{
-			  		mainRoutes.cards.map((route) => {  			
+			  		cards.map((route) => {  			
 			  			return 	(
 			  				<Route
+			  				  exact
 							      path={route.path}
 							      key={route.name}
 							      render={(props) => (
