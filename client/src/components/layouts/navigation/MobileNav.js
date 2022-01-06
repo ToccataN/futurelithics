@@ -57,18 +57,18 @@ const RecursiveAccordion = (props) => {
 						  
 							<CardHeader onClick={() => toggle(route.name)} className="d-flex justify-content-between align-items-center ps-4">
 					       <FontAwesomeIcon icon={ faAngleDown } className={iconClass(card, route.name)}  />
-					       <Link to={{pathname: route.path}} onClick={() => parentToggle()}  target={route.type == 'external' ? "_balnk" : ""}  className="flex-grow text-start mw-100">
+					       <Link to={{pathname: route.path}} onClick={parentToggle}  target={route.type == 'external' ? "_balnk" : ""}  className="flex-grow text-start mw-100">
 						       <h6 style={{paddingRight: `${10 * (route.level - 1)}px` }} className="text-end mb-0">
 						         {route.title}
 						       </h6> 
 					       </Link>  
 					    </CardHeader>
 					    <Collapse isOpen={card === route.name ? true : false}>
-					    	<RecursiveAccordion routes={route.routes} />
+					    	<RecursiveAccordion routes={route.routes} parentToggle={parentToggle} />
 					    </Collapse>
 						</Card>
 					)		
-				} else {
+				} else if (route.type == 'active') {
 					return (
 						<Card key={route.name}>
 							<CardHeader>
@@ -101,7 +101,7 @@ const MobileNav = (props) => {
 
 	return (
 	 	<div className="d-block d-sm-none mobile-nav">
-	 	  <button className={`mobile-toggle btn btn-secondary ${open ? "focused" : ""}`} onClick={() => toggle}>
+	 	  <button className={`mobile-toggle btn btn-secondary ${open ? "focused" : ""}`} onClick={toggle}>
 	 	  	{!open ? <FontAwesomeIcon icon={faBars} /> : <FontAwesomeIcon icon={faTimes} />}
 	 	  </button>
 	 	  { open && <div className="mobile-nav-body"><RecursiveAccordion routes={routes} parentToggle={toggle} /></div> }
