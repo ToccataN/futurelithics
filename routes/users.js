@@ -3,7 +3,7 @@ var router = express.Router();
 var bodyParser = require("body-parser");
 var passport = require("passport");
 var authenticate = require("../utilities/authenticate");
-const model = require('../db/models');
+const model = require("../db/models");
 
 router.use(bodyParser.json());
 
@@ -24,7 +24,7 @@ router.post("/register", function (req, res, next) {
   model.User.create({
     name: username,
     password: password,
-    email: email
+    email: email,
   })
     .then((user) => {
       const userObject = user.toJSON();
@@ -32,7 +32,7 @@ router.post("/register", function (req, res, next) {
       let responseObject = {
         id: userObject.id,
         username: userObject.name,
-        email: userObject.email
+        email: userObject.email,
       };
       res.statusCode = 200;
       res.setHeader("Content-Type", "application/json");
@@ -51,7 +51,7 @@ router.post("/register", function (req, res, next) {
 });
 
 router.post("/login", function (req, res, next) {
-  console.log(req.body, "BODY!!!")
+  console.log(req.body, "BODY!!!");
   const { username, password } = req.body;
   model.User.findOne({
     where: {
@@ -59,7 +59,7 @@ router.post("/login", function (req, res, next) {
     },
   })
     .then((user) => {
-      console.log(user, "USER!!!")
+      console.log(user, "USER!!!");
       res.setHeader("Content-Type", "application/json");
       res.statusCode = 401;
       if (!user) {
@@ -76,11 +76,11 @@ router.post("/login", function (req, res, next) {
       } else {
         const userObject = user.toJSON();
         let token = authenticate.getToken(userObject);
-        console.log(token, "TOKEN!!!")
+        console.log(token, "TOKEN!!!");
         let responseObject = {
           id: userObject.id,
           username: userObject.name,
-          email: userObject.email
+          email: userObject.email,
         };
         res.statusCode = 200;
         res.json({

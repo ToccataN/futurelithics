@@ -3,12 +3,12 @@ var express = require("express");
 var router = express.Router();
 var bodyParser = require("body-parser");
 
-const transporter = require('../utilities/mailTransport');
+const transporter = require("../utilities/mailTransport");
 
 router.use(bodyParser.json());
 
 router.post("/contact-me", function (req, res, next) {
-  const {firstName, lastName, message, email} = req.body;
+  const { firstName, lastName, message, email } = req.body;
 
   const from = `${firstName} ${lastName} <${email}>`;
 
@@ -20,13 +20,13 @@ router.post("/contact-me", function (req, res, next) {
   };
 
   transporter.sendMail(mail, (err, data) => {
-    if(err) {
-      console.log(err, "error")
+    if (err) {
+      console.log(err, "error");
       res.status(500).send(err);
     } else {
-      res.status(200).send('mail successfully sent!')
+      res.status(200).send("mail successfully sent!");
     }
-  })
+  });
 });
 
 module.exports = router;

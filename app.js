@@ -10,12 +10,8 @@ var usersRouter = require("./routes/users");
 var mailerRouter = require("./routes/mailer");
 var app = express();
 
-
-if (true){
-  var cors = require("cors");
-  app.use(cors());  
-}
-
+var cors = require("cors");
+app.use(cors());
 
 var sequelize = require("./db/models/index.js");
 
@@ -30,11 +26,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-
-if(process.env.NODE_ENV === 'production'){
-  app.use(express.static(path.join(__dirname, './client/build')));
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "./client/build")));
 }
-
 
 app.use("/", indexRouter);
 app.use("/api/users", usersRouter);

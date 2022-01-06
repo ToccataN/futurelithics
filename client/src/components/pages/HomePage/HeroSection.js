@@ -8,7 +8,7 @@ const HeroSection = () => {
 		<div className="custom-radial-bg py-4">
 			<div className="container py-4 my-4">
 				<div className="row justify-content-between position-relative">
-					<div className="col-md-5 col-sm-12 text-secondary px-4 m-0 m-md-4 pt-4">
+					<div className="col-md-5 col-sm-12 text-secondary px-4 m-0 m-md-4 pt-0 pt-sm-4">
 						<div className="hero-card my-4 mx-auto p-4 d-flex flex-column justify-content-between">
 						  <div className="mb-4">
 								<h2 className="mb-4">Let’s get started building your vision today.</h2>

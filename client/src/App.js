@@ -15,7 +15,7 @@ function App() {
     <Provider store={store} >
       <PersistGate loading={null} persistor={persistor}>
         <BrowserRouter>
-          <div className="App">
+          <div className="App mt-4 pt-4">
             <MainLayout />
           </div>
         </BrowserRouter>
