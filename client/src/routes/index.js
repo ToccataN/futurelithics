@@ -1,5 +1,5 @@
 import Home from "./Home";
-import ServicePage from './ServicePage';
+import ServiceDirectory from './ServiceDirectory';
 
 import phImage from "../assets/images/binary-code-image.png"
 import uiUxStock from "../assets/images/stock-ui-ux.png"
@@ -24,7 +24,7 @@ const cardRoutes = [
     name: "data",
     title: "Data Visualization & Analysis",
     description: 'Interactive visualizations are invaluable to for facilitating effective data exploration, and therefore to an organization’s ability to maintain a situational awareness of trends.',
-    component: ServicePage,
+    component: ServiceDirectory,
     image: {
       src: analyticStock,
       alt: 'Analytics & Insights',
@@ -52,7 +52,7 @@ const cardRoutes = [
     name: "dev",
     title: "Full Stack Web Development",
     description: 'End-to-end solutions spanning the entire lifecycle of your application: API design, database administration, and front-end development.',
-    component: ServicePage,
+    component: ServiceDirectory,
     image: {
       src: phImage,
       alt: 'Placeholder'
@@ -107,7 +107,7 @@ const cardRoutes = [
     name: "ux",
     title: "UI/UX & Design",
     description: 'High definition mockups, along with wireframing, information architecture, and basic design services to ensure a seamless experience your site users will love.',
-    component: ServicePage,
+    component: ServiceDirectory,
     image: {
       src: uiUxStock,
       alt: 'UI/UX & Design',

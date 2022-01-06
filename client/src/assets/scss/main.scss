@@ -32,16 +32,22 @@ a {
 
 .desktop-toggle.btn-secondary,
 .mobile-toggle.btn-secondary,
-.desktop-toggle.btn-secondary:focus, {
+.desktop-toggle.btn-secondary:focus,
+.mobile-toggle.btn-secondary:focus,
+.mobile-toggle.btn-secondary:hover {
 	color: $primary;
 	background-color: $darkash;
+	border: none;
+}
+
+.mobile-toggle.btn-secondary,
+.mobile-toggle.btn-secondary:hover{
 	border: 1px solid $primary;
 }
 
 .desktop-toggle.btn-secondary:hover,
-.desktop-toggle.btn-secondary.focused
-.mobile-toggle.btn-secondary:hover,
-.mobile-toggle.btn-secondary:focus  {
+.desktop-toggle.btn-secondary.focused,
+.mobile-toggle.btn-secondary.focused {
 	color: $darkash;
 	background-color: $primary;
 	border: 1px solid $darkash;

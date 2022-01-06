@@ -10,7 +10,7 @@ const routeFilter = (route) => {
 	if(route.routes){
 		const routes = route.routes;
 		const filteredRoutes = routes.filter((r) => {
-			return r.type === 'active' || r.type === 'external';
+			return r.type === 'active';
 		});
 
 		if(filteredRoutes.length > 0){
