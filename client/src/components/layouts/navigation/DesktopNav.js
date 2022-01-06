@@ -35,7 +35,7 @@ const RecursiveDropdown = (props) => {
       <DropdownToggle toggle={toggle} caret={false} className="desktop-toggle-sub" >
       	<div className="d-flex justify-content-between align-items-center">
       	  <FontAwesomeIcon icon={ faArrowLeft } className=" align-middle icon"  />
-      	  <Link to={route.path} className="flex-grow text-end w-100">{route.title}</Link>
+      	  <Link to={route.path} className="flex-grow text-end w-100 pe-2">{route.title}</Link>
 	      </div>
       </DropdownToggle>
       <DropdownMenu className="py-2 desktop-sub-nav-menu" left="true">
