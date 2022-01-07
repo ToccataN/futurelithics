@@ -1,11 +1,10 @@
 import React from 'react';
 import {withRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
-import ServiceCard from '../../components/shared/ServiceCard';
 
-const ServiceDirectory = (props) => {
+const ServicePage = (props) => {
 	console.log(props, "servicePage pr!");
-	const { routes, info, history } = props;
+	const { info, history } = props;
 
 	return (
 		<div className="custom-layer-bg service-page mt-4">
@@ -16,15 +15,6 @@ const ServiceDirectory = (props) => {
 			  </div>				
 			</div>
 
-		  <div className="container p-y w-100 row justify-content-between mx-auto">
-
-
-		  	{
-		  		routes != undefined && routes.map((route) => {
-		  				return <ServiceCard  card={route} key={route.name} />
-		  		})
-		  	}
-		  </div>
 		  <div className="container text-center pt-4">
 		    <button className="btn btn-info" onClick={() => history.goBack()}>
 					Go Back
@@ -34,10 +24,9 @@ const ServiceDirectory = (props) => {
 	);
 }
 
-ServiceDirectory.propTypes = {
-	routes: PropTypes.array,
+ServicePage.propTypes = {
 	info: PropTypes.object,
 	history: PropTypes.object
 }
 
-export default withRouter(ServiceDirectory);
+export default withRouter(ServicePage);

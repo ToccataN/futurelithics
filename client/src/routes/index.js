@@ -11,6 +11,7 @@ import discountAbuse from "../assets/images/discount_abuse.jpeg";
 import foodAnalysis from "../assets/images/FoodAnalysis.jpg";
 import Profitsbyregion from "../assets/images/Profitsbyregion.jpg";
 import globalConflict from "../assets/images/globalConflict.jpg";
+import figmaMockup from "../assets/images/FigmaMockup.jpg";
 
 
 const basicRoutes = [
@@ -193,18 +194,16 @@ const cardRoutes = [
     level: 1,
     routes: [
       {
-        name: "content_mapping",
-        title: "Content Mapping",
+        name: "figma_mockup",
+        title: "Mockups w/ Figma",
         image: {
-          src: "https://lyricitriade.com/wp-content/uploads/Spectrifact-Cmap.jpg",
-          alt: "Content Mapping | LyriciTriade",
-          preprocess: true,
+          src: figmaMockup,
+          alt: "Mockup for Future Lithics with Figma"
         },
-        description:
-          "Content mapping is an important first step when deciding the proper flow of a user's experience.",
-        path: "https://lyricitriade.com/a-journey-in-product-development-part-1-ideation-and-content-mapping/",
-        type: "external",
-        level: 2,
+        description: "Figma is an excellent tool for quickly producing high quality site mockups.",
+        type: "inactive",
+        path: '/',
+        level: 2
       },
       {
         name: "wireframing",
@@ -231,6 +230,20 @@ const cardRoutes = [
         description:
           "Having a clickable prototype can give clients a feel for how the application will work before the coding begins.",
         path: "https://xd.adobe.com/view/0dec45e4-7c0d-492c-8704-30b6949345f9-58bf/",
+        type: "external",
+        level: 2,
+      },
+      {
+        name: "content_mapping",
+        title: "Content Mapping",
+        image: {
+          src: "https://lyricitriade.com/wp-content/uploads/Spectrifact-Cmap.jpg",
+          alt: "Content Mapping | LyriciTriade",
+          preprocess: true,
+        },
+        description:
+          "Content mapping is an important first step when deciding the proper flow of a user's experience.",
+        path: "https://lyricitriade.com/a-journey-in-product-development-part-1-ideation-and-content-mapping/",
         type: "external",
         level: 2,
       },
