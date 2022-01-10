@@ -112,7 +112,7 @@ const cardRoutes = [
             },
             description:
               "Interactive dashboard visualizing various global conflicts from 2018, originally part of Tableau Public #Makeovermonday.",
-            path: "https://public.tableau.com/app/profile/chad8180/viz/MapProfitandRegion/Map",
+            path: "https://public.tableau.com/app/profile/chad8180/viz/GlobalConflicts2018/Dashboard1",
             type: "external",
             level: 3,
           },
@@ -246,7 +246,7 @@ const cardRoutes = [
         path: "https://lyricitriade.com/a-journey-in-product-development-part-1-ideation-and-content-mapping/",
         type: "external",
         level: 2,
-      },
+      }
     ],
   },
 ];
