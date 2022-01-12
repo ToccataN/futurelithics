@@ -24,6 +24,11 @@ a {
   z-index: 100000;
 }
 
+.ash-container {
+	background-color: $darkash;
+	border-radius: 20px;
+}
+
 .desktop-nav .dropdown-menu,.desktop-nav .dropdown-menu .dropdown-item{
 	background-color: $base;
 	color: $primary;
@@ -282,3 +287,36 @@ a {
 	max-width: 100%;
 }
 
+.grid-lines {
+	.domain {
+	  stroke: transparent;
+  }
+	line {
+		stroke: $fineash;
+	}
+}
+
+.chart-page {
+	margin-top: 5em;
+ 
+	.chart-viewbox {
+		min-height: 300px;
+		background-color: $base;
+		border-radius: 10px;
+		padding: 1em;
+	}
+
+}
+.select-input{
+	.select-input-element{
+		color: $secondary !important;
+		border: none;
+		background-color: $fineash;
+		width: 100%;
+		border-radius: 10px;
+
+		&:focus-visible {
+			outline: none;
+		}
+	}
+}

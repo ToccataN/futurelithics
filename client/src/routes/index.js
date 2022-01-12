@@ -1,5 +1,6 @@
 import Home from "./Home";
 import ServiceDirectory from "./ServiceDirectory";
+import ChartPage from "./ChartPage";
 
 import phImage from "../assets/images/binary-code-image.png";
 import uiUxStock from "../assets/images/stock-ui-ux.png";
@@ -43,6 +44,7 @@ const cardRoutes = [
       {
         name: "chart_card",
         title: "D3.js Chart Library",
+        component: ServiceDirectory,
         image: {
           src: phImage,
           alt: "Placeholder",
@@ -50,8 +52,25 @@ const cardRoutes = [
         description:
           "Interactive visualizations are invaluable to for facilitating effective data exploration, and therefore to an organization’s ability to maintain a situational awareness of trends.",
         path: "/data-viz/chart-card",
-        type: "inactive",
+        type: "active",
         level: 2,
+        routes: [
+          {
+            name: "bar_charts",
+            title: "Bar Charts",
+            component: ChartPage,
+            chart: 'bar-chart',
+            image: {
+              src: phImage,
+              alt: "Placeholder",
+            },
+            description:
+              "Series of Bar charts: single, scaleBand, and stacked.",
+            path: "/data-viz/chart-card/bar-charts",
+            type: "active",
+            level: 3,
+          }          
+        ]
       },
       {
         name: "tableau",
