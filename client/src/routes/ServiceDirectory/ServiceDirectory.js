@@ -16,9 +16,7 @@ const ServiceDirectory = (props) => {
 			  </div>				
 			</div>
 
-		  <div className="container p-y w-100 row justify-content-between mx-auto">
-
-
+		  <div className="container p-y w-100 row justify-content-start mx-auto">
 		  	{
 		  		routes != undefined && routes.map((route) => {
 		  				return <ServiceCard  card={route} key={route.name} />
