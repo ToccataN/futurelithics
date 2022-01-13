@@ -34,7 +34,7 @@ const SingleCategory = (props) => {
 
 	return (
 		<div className="desktop-table-single">
-			<table className="table table-striped table-bordered">
+			<table className="table table-striped table-bordered mb-0">
 				<thead>
 				  <tr>
 					{headers.map((h, i) => (<th key={`header-${i}`}>{h}</th>))}
