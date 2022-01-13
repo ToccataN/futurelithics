@@ -17,7 +17,7 @@ const ChartPage = (props) => {
 	const { info, history } = props;
 
 	return (
-		<div className="chart-page">
+		<div className="chart-page mb-4">
 		  <div className="container">
 		  	{chartSwitch(info.chart, info)}
 		  </div>

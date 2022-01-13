@@ -21,10 +21,15 @@ const BarChartInterface = (props) => {
 
   const defaultData = [
 	  {x: 'Category 1', y: 3},
-	  {x: 'Category 2', y: 1},
+	  {x: 'Category 1', y: 2},
+	  {x: 'Category 2', y: 3},
+	  {x: 'Category 2', y: 5},
 	  {x: 'Category 3', y: 5},
+	  {x: 'Category 3', y: 2},
 	  {x: 'Category 4', y: 1},
-	  {x: 'Category 5', y: 2}
+	  {x: 'Category 4', y: 6},
+	  {x: 'Category 5', y: 2},
+	  {x: 'Category 5', y: 8},
 	]
 
 	const [ orientation, setOrientation] = useState(options.orientation[0].value)
@@ -52,7 +57,7 @@ const BarChartInterface = (props) => {
 			  <BarChartComponent data={defaultData} options={componentOptions} />
 			</div>
 
-		  <div className="text-center p-4 ash-container my-2">
+		  <div className="text-center p-4 ash-container my-4">
 		  	<DesktopTable  data={defaultData} />
 		  </div>
 		</div>

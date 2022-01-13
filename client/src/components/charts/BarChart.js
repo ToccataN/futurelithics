@@ -24,7 +24,7 @@ class BarChart extends BaseChart {
   	  .range([this.margins.left, this.dimensions.innerWidth] );
 
   	this.scaleY = d3.scaleLinear()
-  	  .domain([0, d3.max(data, (d) => d.y)])
+  	  .domain([0, d3.max(data, (d) => d.y) + 1])
   	  .range([this.dimensions.innerHeight, this.margins.bottom])
 
   	this.axisX = d3.axisBottom(this.scaleX).ticks(data.map( (d) => d.x).length);
@@ -81,8 +81,8 @@ class BarChart extends BaseChart {
   	  .range([this.dimensions.innerHeight, this.margins.top] );
 
   	this.scaleY = d3.scaleLinear()
-  	  .domain([d3.max(data, (d) => d.y) + 1 , 0])
-  	  .range([this.dimensions.innerWidth, this.margins.left])
+  	  .domain([0, d3.max(data, (d) => d.y) + 1])
+  	  .range([this.margins.left, this.dimensions.innerWidth])
 
   	this.axisX = d3.axisLeft(this.scaleX).ticks(data.map( (d) => d.x).length);
   	this.axisY = d3.axisTop(this.scaleY).ticks(5);
@@ -129,7 +129,7 @@ class BarChart extends BaseChart {
 	  	  .attr("height", this.scaleX.bandwidth() - this.margins.left )
 	  	  .attr("x",  this.scaleY(0))
 	  	  .transition()
-	  	  .attr("width",(d) => this.scaleY(d.y))
+	  	  .attr("width",(d) => this.scaleY(d.y) - this.margins.left )
 
 	  this.bars.append("text")
 	    .style("stroke", "transparent")
@@ -140,7 +140,7 @@ class BarChart extends BaseChart {
 	    .attr("y",(d) => this.scaleX(d.x) + ( this.margins.top / 2 ) - 2 )
 	    .attr("x",(d) => this.scaleY(0) + this.margins.left )
 	    .transition()
-	    .attr("x",(d) => this.scaleY(d.y) + (this.margins.left * 1.5) )
+	    .attr("x",(d) => this.scaleY(d.y) + (this.margins.left) )
 	  	
   }
 
@@ -165,6 +165,23 @@ const BarChartComponent = (props) => {
 	  height: 300
 	}
 
+	const collectData = {};
+
+	data.map((d) => {
+		if( Object.keys(collectData).includes(d.x) ){
+			collectData[d.x] += d.y;
+		} else {
+			collectData[d.x] = d.y;
+		}
+	})
+
+	const collectArray = [];
+
+	for(let key in collectData){
+		const obj = {x: key, y: collectData[key]}
+		collectArray.push(obj);
+	}
+
   const setOptions = (options) => {
 		if(options == undefined){
 			return defaultOptions;	
@@ -178,8 +195,7 @@ const BarChartComponent = (props) => {
   useEffect(()=>{
   	const chart = new BarChart(getOptions); 
     chart.createChart();
-	  chart.displayData(getOptions, data)
-	  console.log(options, 'options!')
+	  chart.displayData(getOptions, collectArray)
   }, [options])
 
 	return (
