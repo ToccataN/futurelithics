@@ -28,7 +28,7 @@ const flattenRoutes = (routes) => {
 	let acc = [];
 	for(let r = 0; r < routes.length; r++) {
 		const route = routes[r];
-		if (route.type == 'active') {
+		if (route.type == 'active' || route.type == 'page'  ) {
 			acc.push(route);
 		}
 		if(route.routes && route.routes.length > 0){

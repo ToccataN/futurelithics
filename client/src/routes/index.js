@@ -67,7 +67,7 @@ const cardRoutes = [
             description:
               "Series of Bar charts: single, scaleBand, and stacked.",
             path: "/data-viz/chart-card/bar-charts",
-            type: "active",
+            type: "page",
             level: 3,
           }          
         ]
