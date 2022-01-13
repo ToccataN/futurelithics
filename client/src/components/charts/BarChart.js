@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import * as d3 from 'd3';
+import BaseChart from './BaseChart'
 
 /*
  * @param data = [{x: 2, y: 2}, ...]
@@ -11,52 +12,11 @@ import * as d3 from 'd3';
  * 
  */
 
-class BarChart {
-
-	dimension1 = 600;
-	dimension2 = 300;
+class BarChart extends BaseChart {
 
 	constructor(options){
-		this.setDimensions(options);
-		this.containerId = options.containerId;
-    this.container = d3.select(`#${this.containerId}`);
-  	this.container.selectAll("svg").remove();
+		super(options);
 	}
-
-  setDimensions(options){
-  	if(options && options.orientation && options.orientation === 'portriat'){
-  		this.height = this.dimension1;
-  		this.width = this.dimension2;
-  	} else {
- 			this.height = this.dimension2;
-  		this.width = this.dimension1;	
-  	}
-  }
-
-  createChart(){
-  	this.svg = this.container.append("svg");
-
-  	this.box = this.container.node().getBoundingClientRect();
-
-  	this.margins = {
-  		top: this.height / 15,
-  		bottom: this.height / 15,
-  		right: this.width / 30,
-  		left: this.width / 30
-  	}
-
-  	this.dimensions = {
-  		innerWidth: this.width - this.margins.left - this.margins.right,
-  		innerHeight: this.height - this.margins.top - this.margins.bottom,
-  	}
-
-  	this.svg.attr("viewBox", `0 0 ${this.width} ${this.height}`)
-  		.attr("preserveAspectRatio", "xMinYMin  meet")
-
-    this.mainGroup = this.svg.append("g");
-
-    this.mainGroup.attr("transform", `translate(${this.margins.left}, ${this.margins.top})`)
-  }
 
   setHorizontalScalesAndAxis(data){
   	this.scaleX = d3.scaleBand()
@@ -64,7 +24,7 @@ class BarChart {
   	  .range([this.margins.left, this.dimensions.innerWidth] );
 
   	this.scaleY = d3.scaleLinear()
-  	  .domain([0, d3.max(data, (d) => d.y) + 1])
+  	  .domain([0, d3.max(data, (d) => d.y)])
   	  .range([this.dimensions.innerHeight, this.margins.bottom])
 
   	this.axisX = d3.axisBottom(this.scaleX).ticks(data.map( (d) => d.x).length);
@@ -111,8 +71,8 @@ class BarChart {
 	  	  .attr("height", 0 )
 	  	  .attr("y",  this.scaleY(0))
 	  	  .transition()
-	  	  .attr("y", (d) => this.dimensions.innerHeight - this.scaleY(d.y) )
-	  	  .attr("height",(d) => this.scaleY(d.y))	  	  
+	  	  .attr("y", (d) => this.scaleY(d.y) )
+	  	  .attr("height",(d) =>this.dimensions.innerHeight - this.scaleY(d.y))	  	  
   }
 
   setVerticalScalesAndAxis(data){
@@ -133,7 +93,7 @@ class BarChart {
   	this.leftAxis = this.mainGroup.append("g")
   	  .attr("class", "text-secondary")
   	  .attr("transform", `translate(${0}, -${0})`)
-  		.call(this.axisX.tickFormat(""))
+  		.call(this.axisX.tickFormat("") )
 
   	this.topAxis = this.mainGroup.append("g")
   	  .attr("class", "text-secondary")
@@ -169,14 +129,19 @@ class BarChart {
 	  	  .attr("height", this.scaleX.bandwidth() - this.margins.left )
 	  	  .attr("x",  this.scaleY(0))
 	  	  .transition()
-	  	  .attr("width",(d) => this.dimensions.innerWidth - this.scaleY(d.y))
+	  	  .attr("width",(d) => this.scaleY(d.y))
 
 	  this.bars.append("text")
-	    .style("stroke", "#484641ff")
-	    .style("font-size", "8px")
+	    .style("stroke", "transparent")
+	    .style("fill", "#F8BA42")
+	    .style("font-size", "0.7em")
+	    .style("stroke-width", "0.1em")
+	    .text((d) => d.x)
 	    .attr("y",(d) => this.scaleX(d.x) + ( this.margins.top / 2 ) - 2 )
-	    .attr("x",(d) => this.scaleY(0) + 5 )
-	  	.text((d) => d.x)
+	    .attr("x",(d) => this.scaleY(0) + this.margins.left )
+	    .transition()
+	    .attr("x",(d) => this.scaleY(d.y) + (this.margins.left * 1.5) )
+	  	
   }
 
   displayData(options, data){
@@ -195,7 +160,9 @@ const BarChartComponent = (props) => {
 
 	const defaultOptions = {
     orientation: 'landscape',
-    containerId: "bar-chart"
+    containerId: "bar-chart",
+    width: 600,
+	  height: 300
 	}
 
   const setOptions = (options) => {
@@ -211,7 +178,8 @@ const BarChartComponent = (props) => {
   useEffect(()=>{
   	const chart = new BarChart(getOptions); 
     chart.createChart();
-	  chart.displayData(getOptions, data)  
+	  chart.displayData(getOptions, data)
+	  console.log(options, 'options!')
   }, [options])
 
 	return (

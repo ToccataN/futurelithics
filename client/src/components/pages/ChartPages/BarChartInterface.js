@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import BarChartComponent from '../../charts/BarChart';
+import DesktopTable from '../../tables/DesktopTable';
 import SelectInput from '../../shared/SelectInput';
 
 const options = {
 	orientation: [
+	  { value: 'landscape', key: "Landscape"},
 		{ value: 'portriat', key: "Portriat"},
-		{ value: 'landscape', key: "Landscape"},
 	],
 	chartType: [
 		{ value: 'bar', key: "Bar"},
@@ -26,12 +27,14 @@ const BarChartInterface = (props) => {
 	  {x: 'Category 5', y: 2}
 	]
 
-	const [ orientation, setOrientation] = useState(options.orientation[0])
+	const [ orientation, setOrientation] = useState(options.orientation[0].value)
 	const [ chartType, setChartType] = useState(options.chartType[0]);
 
 	const componentOptions = {
 		orientation,
-		containerId: 'bar-divy-1'
+		containerId: 'bar-divy-1',
+		width: 600,
+	  height: 300
 	}
 
 	return (
@@ -50,7 +53,7 @@ const BarChartInterface = (props) => {
 			</div>
 
 		  <div className="text-center p-4 ash-container my-2">
-
+		  	<DesktopTable  data={defaultData} />
 		  </div>
 		</div>
 	);

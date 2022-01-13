@@ -320,3 +320,21 @@ a {
 		}
 	}
 }
+
+.desktop-table-container {
+	background-color: $fineash;
+}
+
+.table {
+	border-color: $base !important;
+}
+
+.table > :not(:first-child){
+	border-top: none !important;
+}
+
+th {
+	color: $secondary;
+	padding: 1.15em 0.5em;
+}
+
