@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import BarChartComponent from '../../charts/BarChart';
 import DesktopTable from '../../tables/DesktopTable';
+import MobileTable from '../../tables/MobileTable';
 import SelectInput from '../../shared/SelectInput';
 
 const options = {
@@ -54,8 +55,11 @@ const BarChartInterface = (props) => {
 			  <BarChartComponent data={data} options={componentOptions} />
 			</div>
 
-		  <div className="text-center p-4 ash-container my-4">
+		  <div className="text-center p-4 ash-container my-4 d-none d-sm-block">
 		  	<DesktopTable  data={data} type={chartType.table} />
+		  </div>
+		  <div className="text-center p-4 ash-container my-4 d-block d-sm-none">
+		  	<MobileTable  data={data} type={chartType.table} />
 		  </div>
 		</div>
 	);
