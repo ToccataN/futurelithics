@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+
 import BarChartComponent from '../../charts/BarChart';
 import BandedBarComponent from '../../charts/BandedBarChart';
+import StackedBarComponent from '../../charts/StackedBarChart';
 
 import DesktopTable from '../../tables/DesktopTable';
 import MobileTable from '../../tables/MobileTable';
@@ -25,6 +27,8 @@ const componentSwitch = (value, data, options) => {
 		  return (<BarChartComponent data={data} options={options} />);
 		case 'scaleBand':
 		  return (<BandedBarComponent data={data} options={options} />);
+		case 'stacked':
+		  return (<StackedBarComponent data={data} options={options} />)
 		default:
 		  return (<BarChartComponent data={data} options={options} />);
 	}
