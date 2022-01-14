@@ -203,8 +203,6 @@ const StackedBarComponent = (props) => {
   /* values should be sorted so longer rectangles are rendered first */
   const sortedData = data.sort((a, b) => b.y - a.y );
 
-  console.log(sortedData, "sortedData")
-
   const getOptions = setOptions(options);
 
   useEffect(()=>{

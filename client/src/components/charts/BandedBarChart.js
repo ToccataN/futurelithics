@@ -92,8 +92,6 @@ class BandedBarChart extends BaseChart {
   appendHorizontalBars(data){
   	this.setHorizontalScalesAndAxis(data);
 
-  	console.log(this.scaleX2.bandwidth(), "x: ", this.scaleX.bandwidth())
-
   	this.bars = this.mainGroup.append("g")
   		.attr("transform", `translate(${this.margins.left}, -${this.margins.top})`)
   	  .selectAll(".bars")
