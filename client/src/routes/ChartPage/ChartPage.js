@@ -4,12 +4,14 @@ import PropTypes from 'prop-types';
 
 import BarChartInterface from '../../components/pages/ChartPages/BarChartInterface';
 
+import barChartData from '../../data/barChartData';
+
 const chartSwitch = (chart, info) => {
 	switch(chart){
 		case 'bar-chart':
-			return (<BarChartInterface info={info}/>);
+			return (<BarChartInterface info={info} data={barChartData} />);
 		default:
-			return (<BarChartInterface info={info} />);
+			return (<BarChartInterface info={info} data={barChartData} />);
 	}
 }
 
