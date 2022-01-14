@@ -7,8 +7,8 @@ class BandedBarChart extends BaseChart {
 
 	constructor(options){
 		super(options);
-
-		this.colorFxn = d3.scaleOrdinal(d3.schemeCategory10);
+		
+		this.colorFxn = d3.scaleOrdinal(d3[`scheme${options.colorScheme.scheme}`]);
 		this.createTooltip();
 	}
 
@@ -21,7 +21,7 @@ class BandedBarChart extends BaseChart {
 	displayTooltip(e, d){
 	  
     this.targetBar = d3.select(event.currentTarget);
-    this.targetBar.style("fill", "#90F1C4")
+    this.targetBar.style("fill", this.color)
 
     this.tooltip.transition()		
 	    .duration(200)		
@@ -91,8 +91,6 @@ class BandedBarChart extends BaseChart {
 
   appendHorizontalBars(data){
   	this.setHorizontalScalesAndAxis(data);
-
-  	console.log(this.scaleX2.bandwidth(), "x: ", this.scaleX.bandwidth())
 
   	this.bars = this.mainGroup.append("g")
   		.attr("transform", `translate(${this.margins.left}, -${this.margins.top})`)
