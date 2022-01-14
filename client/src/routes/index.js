@@ -13,6 +13,7 @@ import foodAnalysis from "../assets/images/FoodAnalysis.jpg";
 import Profitsbyregion from "../assets/images/Profitsbyregion.jpg";
 import globalConflict from "../assets/images/globalConflict.jpg";
 import figmaMockup from "../assets/images/FigmaMockup.jpg";
+import barCharts from "../assets/images/barCharts.png";
 
 
 const basicRoutes = [
@@ -46,7 +47,7 @@ const cardRoutes = [
         title: "D3.js Chart Library",
         component: ServiceDirectory,
         image: {
-          src: phImage,
+          src: barCharts,
           alt: "Placeholder",
         },
         description:
@@ -61,7 +62,7 @@ const cardRoutes = [
             component: ChartPage,
             chart: 'bar-chart',
             image: {
-              src: phImage,
+              src: barCharts,
               alt: "Placeholder",
             },
             description:

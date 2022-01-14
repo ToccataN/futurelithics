@@ -338,3 +338,17 @@ th {
 	background-color: $darkash !important;
 }
 
+div.tooltip {	
+    position: absolute;			
+    text-align: left;			
+    min-width: 30px;					
+    min-height: 30px;					
+    padding: 1.5em;		
+    background: $base;	
+    border: 0px;		
+    border-radius: 10px;			
+    pointer-events: none;
+    color: $secondary;
+    font-size: 0.7em;
+}
+
