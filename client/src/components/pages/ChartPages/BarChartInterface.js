@@ -20,7 +20,7 @@ const options = {
 		{ value: 'stacked', key: "Stacked Bar", table: 'double'},
 	],
 	colorScheme: [
-		{ value: 'default', key: "Default", highlight: '#25DD87', scheme: 'Dark2' },
+		{ value: 'default', key: "Default Colors", highlight: '#25DD87', scheme: 'Dark2' },
 		{ value: 'second', key: "Category 10", highlight: '#F8BA42', scheme: 'Category10' },
 		{ value: 'tableau', key: "Tableau 10", highlight: '#d82340', scheme: 'Tableau10' }
 	]
