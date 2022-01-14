@@ -18,6 +18,11 @@ const options = {
 		{ value: 'bar', key: "Bar", table: 'single'},
 		{ value: 'scaleBand', key: "Scale Band", table: 'double'},
 		{ value: 'stacked', key: "Stacked Bar", table: 'double'},
+	],
+	colorScheme: [
+		{ value: 'default', key: "Default", highlight: '#25DD87', scheme: 'Dark2' },
+		{ value: 'second', key: "Category 10", highlight: '#F8BA42', scheme: 'Category10' },
+		{ value: 'tableau', key: "Tableau 10", highlight: '#d82340', scheme: 'Tableau10' }
 	]
 }
 
@@ -39,6 +44,7 @@ const BarChartInterface = (props) => {
 
 	const [ orientation, setOrientation] = useState(options.orientation[0].value)
 	const [ chartType, setChartType] = useState(options.chartType[0]);
+	const [ colorScheme, setColorScheme] = useState(options.colorScheme[0]);
 
 	const tableOptions = {
 		type: chartType.table,
@@ -50,8 +56,14 @@ const BarChartInterface = (props) => {
 		tableOptions.type = chartType.table;
 	}
 
+	const colorSetter = (value) => {
+		const color = options.colorScheme.filter((c) => c.value == value)[0];
+		setColorScheme(color);
+	}
+
 	const componentOptions = {
 		orientation,
+		colorScheme,
 		containerId: 'bar-divy-1',
 		width: 600,
 	  height: 300
@@ -67,7 +79,10 @@ const BarChartInterface = (props) => {
 				  </div>
 					<div className="col-md-2 py-2">
 				  	<SelectInput options={options.chartType} value={chartType.value} handler={chartSetter} />
-				  </div>	
+				  </div>
+					<div className="col-md-2 py-2">
+				  	<SelectInput options={options.colorScheme} value={colorScheme.value} handler={colorSetter} />
+				  </div>
 				</div>
 			  {componentSwitch(chartType.value, data, componentOptions)}
 			</div>

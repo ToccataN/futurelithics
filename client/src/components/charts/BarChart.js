@@ -66,7 +66,7 @@ class BarChart extends BaseChart {
   	  .data(data)
 	  	  .enter().append("rect")
 	  	  .attr("x", (d) => this.scaleX(d.x))
-	  	  .style("fill", '#90F1C4')
+	  	  .style("fill", this.color )
 	  	  .attr("width", this.scaleX.bandwidth() - this.margins.right - this.margins.left)
 	  	  .attr("height", 0 )
 	  	  .attr("y",  this.scaleY(0))
@@ -124,7 +124,7 @@ class BarChart extends BaseChart {
 
 	  this.bars.append("rect")
 	  	  .attr("y", (d) => this.scaleX(d.x) - (this.margins.top / 2) )
-	  	  .style("fill", '#90F1C4')
+	  	  .style("fill", this.color)
 	  	  .attr("width", 0)
 	  	  .attr("height", this.scaleX.bandwidth() - this.margins.left )
 	  	  .attr("x",  this.scaleY(0))

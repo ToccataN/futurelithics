@@ -9,6 +9,8 @@ class BaseChart {
 
 	constructor(options = defaultOptions){
     this.options = options;
+    
+    this.color = options.colorScheme.highlight
 		this.setDimensions();
 		this.containerId = options.containerId;
     this.container = d3.select(`#${this.containerId}`);
