@@ -201,7 +201,7 @@ const StackedBarComponent = (props) => {
   }
   
   /* values should be sorted so longer rectangles are rendered first */
-  const sortedData = data.sort((a, b) => b.y - a.y );
+  let sortedData = [...data].sort((a, b) => b.y - a.y );
 
   const getOptions = setOptions(options);
 
