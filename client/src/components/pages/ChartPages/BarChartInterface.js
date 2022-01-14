@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import BarChartComponent from '../../charts/BarChart';
+import BandedBarComponent from '../../charts/BandedBarChart';
+
 import DesktopTable from '../../tables/DesktopTable';
 import MobileTable from '../../tables/MobileTable';
 import SelectInput from '../../shared/SelectInput';
@@ -15,6 +17,17 @@ const options = {
 		{ value: 'scaleBand', key: "Scale Band", table: 'double'},
 		{ value: 'stacked', key: "Stacked Bar", table: 'double'},
 	]
+}
+
+const componentSwitch = (value, data, options) => {
+	switch(value){
+		case 'bar':
+		  return (<BarChartComponent data={data} options={options} />);
+		case 'scaleBand':
+		  return (<BandedBarComponent data={data} options={options} />);
+		default:
+		  return (<BarChartComponent data={data} options={options} />);
+	}
 }
 
 const BarChartInterface = (props) => {
@@ -52,7 +65,7 @@ const BarChartInterface = (props) => {
 				  	<SelectInput options={options.chartType} value={chartType.value} handler={chartSetter} />
 				  </div>	
 				</div>
-			  <BarChartComponent data={data} options={componentOptions} />
+			  {componentSwitch(chartType.value, data, componentOptions)}
 			</div>
 
 		  <div className="text-center p-4 ash-container my-4 d-none d-md-block">

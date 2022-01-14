@@ -3,25 +3,57 @@ import PropTypes from 'prop-types';
 import * as d3 from 'd3';
 import BaseChart from './BaseChart'
 
-/*
- * @param data = [{x: 2, y: 2}, ...]
- * @param options {
- *    orientation: 'portriat' || 'landscape',
- *    containerId: String
- *  }
- * 
- */
-
-class BarChart extends BaseChart {
+class BandedBarChart extends BaseChart {
 
 	constructor(options){
 		super(options);
+
+		this.colorFxn = d3.scaleOrdinal(d3.schemeCategory10);
+		this.createTooltip();
 	}
+
+	createTooltip(){
+		this.tooltip = d3.select("body").append("div")
+      .attr("class", "tooltip")
+		  .style("opacity", 0);
+	}
+
+	displayTooltip(e, d){
+	  
+    this.targetBar = d3.select(event.currentTarget);
+    this.targetBar.style("fill", "#90F1C4")
+
+    this.tooltip.transition()		
+	    .duration(200)		
+	    .style("opacity", .9);
+
+	  const dataHtml = `Category: <strong class="text-primary">${d.x}</strong> <br /> 
+	    Subcategory: <strong class="text-primary">${d.x2}</strong> <br /> 
+	    Value: <strong class="text-primary">${d.y}</strong>`;
+
+	  this.tooltip.html(dataHtml)
+      .style("left", (e.pageX) + "px")		
+      .style("top", (e.pageY - 30) + "px");
+	}
+
+  hideTooltip(e){
+
+  	this.targetBar = d3.select(event.currentTarget);
+  	this.targetBar.style("fill", (d) => this.colorFxn(d.x2) )
+
+    this.tooltip.transition()		
+	    .duration(200)		
+	    .style("opacity", 0);
+  }
 
   setHorizontalScalesAndAxis(data){
   	this.scaleX = d3.scaleBand()
   	  .domain(data.map( (d) => d.x))
   	  .range([this.margins.left, this.dimensions.innerWidth] );
+
+  	this.scaleX2 = d3.scaleBand()
+  	  .domain(new Set([...data.map( (d) => d.x2)]) )
+  	  .range([0, this.scaleX.bandwidth() - this.margins.right ] );
 
   	this.scaleY = d3.scaleLinear()
   	  .domain([0, d3.max(data, (d) => d.y) + 1])
@@ -60,19 +92,28 @@ class BarChart extends BaseChart {
   appendHorizontalBars(data){
   	this.setHorizontalScalesAndAxis(data);
 
+  	console.log(this.scaleX2.bandwidth(), "x: ", this.scaleX.bandwidth())
+
   	this.bars = this.mainGroup.append("g")
   		.attr("transform", `translate(${this.margins.left}, -${this.margins.top})`)
   	  .selectAll(".bars")
-  	  .data(data)
-	  	  .enter().append("rect")
-	  	  .attr("x", (d) => this.scaleX(d.x))
-	  	  .style("fill", '#90F1C4')
-	  	  .attr("width", this.scaleX.bandwidth() - this.margins.right - this.margins.left)
+  	  .data(data).enter()
+        .append("rect")
+  	    .attr("class", "rects")
+	  	  .attr("x", (d) => this.scaleX(d.x) + this.scaleX2(d.x2) - (this.margins.left / 2)  )
+	  	  .style("fill",(d) => this.colorFxn(d.x2))
+	  	  .attr("width", this.scaleX2.bandwidth())
 	  	  .attr("height", 0 )
 	  	  .attr("y",  this.scaleY(0))
-	  	  .transition()
+	  
+	  this.bars.transition()
 	  	  .attr("y", (d) => this.scaleY(d.y) )
-	  	  .attr("height",(d) =>this.dimensions.innerHeight - this.scaleY(d.y))	  	  
+	  	  .attr("height",(d) =>this.dimensions.innerHeight - this.scaleY(d.y))
+
+	  this.bars.on("mouseover", (e, d) => this.displayTooltip(e, d) )
+	  	  .on("mouseout", (e) => this.hideTooltip(e) )
+	  	  .on("touchstart", (e, d) => this.displayTooltip(e, d) )
+	  	  .on("touchend", (e) => this.hideTooltip(e) ) 
   }
 
   setVerticalScalesAndAxis(data){
@@ -81,8 +122,12 @@ class BarChart extends BaseChart {
   	  .range([this.dimensions.innerHeight, this.margins.top] );
 
   	this.scaleY = d3.scaleLinear()
-  	  .domain([0, d3.max(data, (d) => d.y) + d3.max(data, (d) => d.y) / 10 ])
-  	  .range([this.margins.left, this.dimensions.innerWidth])
+  	  .domain([0, d3.max(data, (d) => d.y) + 1])
+  	  .range([this.margins.left, this.dimensions.innerWidth]);
+
+  	this.scaleX2 = d3.scaleBand()
+  	  .domain(new Set([...data.map( (d) => d.x2)]) )
+  	  .range([0, this.scaleX.bandwidth() - this.margins.right ] );
 
   	this.axisX = d3.axisLeft(this.scaleX).ticks(data.map( (d) => d.x).length);
   	this.axisY = d3.axisTop(this.scaleY).ticks(5);
@@ -120,28 +165,21 @@ class BarChart extends BaseChart {
   		.attr("transform", `translate(-${this.margins.left}, ${this.margins.top})`)
   	  .selectAll(".bars")
   	  .data(data)
-	  	  .enter()
-
-	  this.bars.append("rect")
-	  	  .attr("y", (d) => this.scaleX(d.x) - (this.margins.top / 2) )
-	  	  .style("fill", '#90F1C4')
+	  	  .enter().append("rect")
+	  	  .attr("y", (d) => this.scaleX(d.x) + this.scaleX2(d.x2) - (this.margins.top / 2) )
+	  	  .style("fill", (d) => this.colorFxn(d.x2) )
 	  	  .attr("width", 0)
-	  	  .attr("height", this.scaleX.bandwidth() - this.margins.left )
+	  	  .attr("height",this.scaleX2.bandwidth() )
 	  	  .attr("x",  this.scaleY(0))
-	  	  .transition()
+	  	  
+	  this.bars
+	      .transition()
 	  	  .attr("width",(d) => this.scaleY(d.y) - this.margins.left )
 
-	  this.bars.append("text")
-	    .style("stroke", "transparent")
-	    .style("fill", "#F8BA42")
-	    .style("font-size", "0.7em")
-	    .style("stroke-width", "0.1em")
-	    .text((d) => d.x)
-	    .attr("y",(d) => this.scaleX(d.x) + ( this.margins.top / 2 ) - 2 )
-	    .attr("x",(d) => this.scaleY(0) + this.margins.left )
-	    .transition()
-	    .attr("x",(d) => this.scaleY(d.y) + (5) )
-	  	
+	  this.bars.on("mouseover", (e, d) => this.displayTooltip(e, d) )
+	  	  .on("mouseout", (e) => this.hideTooltip(e) )  
+	  	  .on("touchstart", (e, d) => this.displayTooltip(e, d) )
+	  	  .on("touchend", (e) => this.hideTooltip(e) ) 	  	
   }
 
   displayData(options, data){
@@ -152,10 +190,9 @@ class BarChart extends BaseChart {
   	}
   	
   }
-
 }
 
-const BarChartComponent = (props) => {
+const BandedBarComponent = (props) => {
 	const { data, options } = props;
 
 	const defaultOptions = {
@@ -163,23 +200,6 @@ const BarChartComponent = (props) => {
     containerId: "bar-chart",
     width: 600,
 	  height: 300
-	}
-
-	const collectData = {};
-
-	data.map((d) => {
-		if( Object.keys(collectData).includes(d.x) ){
-			collectData[d.x] += d.y;
-		} else {
-			collectData[d.x] = d.y;
-		}
-	})
-
-	const collectArray = [];
-
-	for(let key in collectData){
-		const obj = {x: key, y: collectData[key]}
-		collectArray.push(obj);
 	}
 
   const setOptions = (options) => {
@@ -193,19 +213,19 @@ const BarChartComponent = (props) => {
   const getOptions = setOptions(options);
 
   useEffect(()=>{
-  	const chart = new BarChart(getOptions); 
+  	const chart = new BandedBarChart(getOptions); 
     chart.createChart();
-	  chart.displayData(getOptions, collectArray)
+	  chart.displayData(getOptions, data)
   }, [options])
-
+  
 	return (
 		<div id={getOptions.containerId} className="chart-viewbox"></div>
 	);
 }
 
-BarChartComponent.propTypes = {
+BandedBarComponent.propTypes = {
 	data: PropTypes.any,
 	options: PropTypes.any
 }
 
-export default BarChartComponent;
+export default BandedBarComponent;
