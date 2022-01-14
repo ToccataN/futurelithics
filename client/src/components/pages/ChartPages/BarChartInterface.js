@@ -55,10 +55,10 @@ const BarChartInterface = (props) => {
 			  <BarChartComponent data={data} options={componentOptions} />
 			</div>
 
-		  <div className="text-center p-4 ash-container my-4 d-none d-sm-block">
+		  <div className="text-center p-4 ash-container my-4 d-none d-md-block">
 		  	<DesktopTable  data={data} type={chartType.table} />
 		  </div>
-		  <div className="text-center p-4 ash-container my-4 d-block d-sm-none">
+		  <div className="text-center p-4 ash-container my-4 d-block d-md-none">
 		  	<MobileTable  data={data} type={chartType.table} />
 		  </div>
 		</div>

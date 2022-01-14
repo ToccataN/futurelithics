@@ -160,11 +160,8 @@ const MobileTable = (props) => {
 
 	const [ header, setHeader ] = useState(headers[0]);
 
-
-
 	const headerHandler = (value) => {
 		setHeader(value);
-		console.log(header);
 	}
 
 	const options = {
