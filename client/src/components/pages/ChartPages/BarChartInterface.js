@@ -10,7 +10,7 @@ import SelectInput from '../../shared/SelectInput';
 const options = {
 	orientation: [
 	  { value: 'landscape', key: "Landscape"},
-		{ value: 'portriat', key: "Portriat"},
+		{ value: 'portrait', key: "Portrait"},
 	],
 	chartType: [
 		{ value: 'bar', key: "Bar", table: 'single'},
