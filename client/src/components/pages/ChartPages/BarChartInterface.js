@@ -70,17 +70,17 @@ const BarChartInterface = (props) => {
 	}
 
 	return (
-		<div className="container my-4">
+		<div className="bar-chart-container container my-4">
 			<div className="p-4 ash-container my-2">
 				<h5>{info.title}</h5>
 				<div className="my-2 row justify-content-start">
-				  <div className="col-md-2 py-2">
+				  <div className="col-md-3 py-2">
 				  	<SelectInput options={options.orientation} value={orientation.value} handler={setOrientation} />
 				  </div>
-					<div className="col-md-2 py-2">
+					<div className="col-md-3 py-2">
 				  	<SelectInput options={options.chartType} value={chartType.value} handler={chartSetter} />
 				  </div>
-					<div className="col-md-2 py-2">
+					<div className="col-md-3 py-2">
 				  	<SelectInput options={options.colorScheme} value={colorScheme.value} handler={colorSetter} />
 				  </div>
 				</div>
