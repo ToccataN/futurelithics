@@ -12,27 +12,29 @@ const sender = (values) => {
       },
       body: JSON.stringify(values),
     })
-    .then((res) => true)
-    .catch((err) => false)  
+    .then((res) => res.json())
+    .catch((err) => err )  
 }
 
-let ContactForm = () => {
+let ContactForm = (props) => {
+
+  const { setModalOpen, setResponse } = props;
 
   const [disableSubmit, setDisableSubmit] = useState(false);
-  const [message, setMessage] = useState(null);
-  const [messageClass, setMessageClass] = useState(null);
 
   const handleSubmit = async (values) => {
     const res = await sender(values);
 
     console.log(res);
-    if(res){
+    if(res.success){
       setDisableSubmit(true);
-      setMessage('You have successfully submitted the form, you will be contacted soon!')
-      setMessageClass('text-primary');
+      res.title = "Email Successful!";
+      setModalOpen(true);
+      setResponse(res);
     } else {
-      setMessage('Something went wrong, please try again later.');
-      setMessageClass('text-danger');
+      const title = "Email Unsuccessful.";
+      setModalOpen(true);
+      setResponse({title, message: res, success: false});
     }
   }
 
@@ -103,7 +105,6 @@ let ContactForm = () => {
             <strong className="text-warning">Submit</strong>
           </button>        
         </div>
-        {message != '' && <div className={messageClass}>{message}</div>}
       </form>
       )
     }
@@ -112,7 +113,9 @@ let ContactForm = () => {
 }
 
 ContactForm.propTypes = {
-  handleSubmit: PropTypes.any
+  handleSubmit: PropTypes.any,
+  setModalOpen: PropTypes.func,
+  setResponse: PropTypes.func
 }
 
 export default ContactForm;

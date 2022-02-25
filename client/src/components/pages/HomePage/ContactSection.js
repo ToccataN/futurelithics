@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import ContactForm from '../../shared/ContactForm';
+import ModalContainer from '../../modals/ModalContainer';
 
 const links = [
 	{
@@ -40,6 +41,9 @@ const Links = () => {
 
 const ContactSection = () => {
 
+	const [modalOpen, setModalOpen] = useState(false);
+	const [response, setResponse] = useState({});
+
 	return (
 		<div className="contact-section py-4">
 		  <a name="contact-section"></a>
@@ -62,10 +66,11 @@ const ContactSection = () => {
 						</p>
 					</div>
 					<div className="section col-md-5 py-4 px-3 mt-4">
-						<ContactForm />
+						<ContactForm setResponse={setResponse} setModalOpen={setModalOpen} />
 					</div>
 				</div>
 			</div>
+			<ModalContainer type="alert" modalOpen={modalOpen} setModalOpen={setModalOpen} response={response} />
 		</div>
 	)
 
