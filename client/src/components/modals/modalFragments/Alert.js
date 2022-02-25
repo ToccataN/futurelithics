@@ -1,15 +1,14 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
-import { Container, Row, Col, Button} from 'reactstrap';
+import { Container, Row, Col, Button } from "reactstrap";
 
 import { loginUser } from "../../../redux/auth/actions";
 
 const Alert = (props) => {
-  
   const { toggle, response } = props;
 
-  console.log(response, "resp!")
+  console.log(response, "resp!");
 
   return (
     <Container className="text-center">
@@ -20,17 +19,18 @@ const Alert = (props) => {
       </Row>
       <Row>
         <Col md={12} className="p-1">
-          <Button onClick={ () => toggle() } color="primary">Ok</Button>
+          <Button onClick={() => toggle()} color="primary">
+            Ok
+          </Button>
         </Col>
       </Row>
-    </Container>  
-  )
-
-}
+    </Container>
+  );
+};
 
 Alert.propTypes = {
   toggle: PropTypes.func,
-  response: PropTypes.any
-}
+  response: PropTypes.any,
+};
 
-export default Alert; 
+export default Alert;

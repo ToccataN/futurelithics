@@ -15,7 +15,6 @@ import globalConflict from "../assets/images/globalConflict.jpg";
 import figmaMockup from "../assets/images/FigmaMockup.jpg";
 import barCharts from "../assets/images/barCharts.png";
 
-
 const basicRoutes = [
   {
     name: "home",
@@ -60,7 +59,7 @@ const cardRoutes = [
             name: "bar_charts",
             title: "Bar Charts",
             component: ChartPage,
-            chart: 'bar-chart',
+            chart: "bar-chart",
             image: {
               src: barCharts,
               alt: "Placeholder",
@@ -70,8 +69,8 @@ const cardRoutes = [
             path: "/data-viz/chart-card/bar-charts",
             type: "page",
             level: 3,
-          }          
-        ]
+          },
+        ],
       },
       {
         name: "tableau",
@@ -99,7 +98,8 @@ const cardRoutes = [
             path: "https://public.tableau.com/app/profile/chad8180/viz/PotentialDiscountAbuse/Dashboard1",
             type: "external",
             level: 3,
-          },{
+          },
+          {
             name: "viz_2",
             title: "Tableau Story",
             image: {
@@ -111,7 +111,8 @@ const cardRoutes = [
             path: "https://public.tableau.com/app/profile/chad8180/viz/MicronutrientAnalysisbyFoodCategory/BasicFoodcategoryAnalysis",
             type: "external",
             level: 3,
-          },{
+          },
+          {
             name: "viz_3",
             title: "Dashboard Example 2",
             image: {
@@ -123,7 +124,8 @@ const cardRoutes = [
             path: "https://public.tableau.com/app/profile/chad8180/viz/MapProfitandRegion/Map",
             type: "external",
             level: 3,
-          },{
+          },
+          {
             name: "viz_4",
             title: "Dashboard Example 3",
             image: {
@@ -218,12 +220,13 @@ const cardRoutes = [
         title: "Mockups w/ Figma",
         image: {
           src: figmaMockup,
-          alt: "Mockup for Future Lithics with Figma"
+          alt: "Mockup for Future Lithics with Figma",
         },
-        description: "Figma is an excellent tool for quickly producing high quality site mockups.",
+        description:
+          "Figma is an excellent tool for quickly producing high quality site mockups.",
         type: "inactive",
-        path: '/',
-        level: 2
+        path: "/",
+        level: 2,
       },
       {
         name: "wireframing",
@@ -266,7 +269,7 @@ const cardRoutes = [
         path: "https://lyricitriade.com/a-journey-in-product-development-part-1-ideation-and-content-mapping/",
         type: "external",
         level: 2,
-      }
+      },
     ],
   },
 ];

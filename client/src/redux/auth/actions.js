@@ -28,7 +28,7 @@ export const loginUser = (creds) => (dispatch) => {
   return fetch("/api/users/login", {
     method: "POST",
     headers: {
-      'Accept': 'application/json, text/plain, */*',
+      Accept: "application/json, text/plain, */*",
       "Content-Type": "application/json",
     },
     body: JSON.stringify(creds),
@@ -53,7 +53,7 @@ export const loginUser = (creds) => (dispatch) => {
     })
     .then((res) => {
       if (res.success) {
-        console.log(res.message)
+        console.log(res.message);
         localStorage.setItem("token", res.token);
         localStorage.setItem("creds", JSON.stringify(res.user));
         dispatch(receiveLogin(res));
@@ -64,14 +64,14 @@ export const loginUser = (creds) => (dispatch) => {
     .catch((err) => console.log(err));
 };
 
-export const registerUser = (creds) => (dispatch) =>  {
+export const registerUser = (creds) => (dispatch) => {
   const { username } = creds;
   dispatch(requestRegister(username));
 
   return fetch("/api/users/register", {
     method: "POST",
     headers: {
-      'Accept': 'application/json, text/plain, */*',
+      Accept: "application/json, text/plain, */*",
       "Content-Type": "application/json",
     },
     body: JSON.stringify(creds),
@@ -105,28 +105,30 @@ export const registerUser = (creds) => (dispatch) =>  {
         return res;
       }
     })
-    .catch( (err) => { return err;  } );
-}
+    .catch((err) => {
+      return err;
+    });
+};
 
 export const requestRegister = () => {
   return {
-    type: Types.REGISTER_REQUEST
-  }
-}
+    type: Types.REGISTER_REQUEST,
+  };
+};
 
 export const receiveRegister = (response) => {
   return {
     type: Types.REGISTER_SUCCESS,
     response: response,
-  }
-}
+  };
+};
 
 export const failedRegister = (response) => {
   return {
     type: Types.REGISTER_FAILURE,
     response: response,
-  }
-}
+  };
+};
 
 export const requestLogout = () => {
   return {
