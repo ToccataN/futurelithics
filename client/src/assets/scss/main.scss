@@ -356,3 +356,11 @@ div.tooltip {
 	max-width: 850px !important;
 }
 
+.modal-header{
+	border-bottom: 1px solid $primary !important;
+}
+
+button.close{
+	background-color: $primary;
+}
+
