@@ -7,7 +7,7 @@
     "client": "cd client && yarn start",
     "start": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
     "formatter": "eslint routes/**/*.js *.js --fix && yarn prettier --write routes/**/*.js *.js && cd client && yarn formatter",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false yarn install --prefix client && yarn run build --prefix client"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
