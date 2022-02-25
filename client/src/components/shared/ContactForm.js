@@ -13,7 +13,7 @@ const sender = (values) => {
       body: JSON.stringify(values),
     })
     .then((res) => res.json())
-    .catch((err) => err )  
+    .catch((err) => { return {message: err, success: false } } )  
 }
 
 let ContactForm = (props) => {
@@ -32,9 +32,9 @@ let ContactForm = (props) => {
       setModalOpen(true);
       setResponse(res);
     } else {
-      const title = "Email Unsuccessful.";
+      res.title = "Email Unsuccessful.";
       setModalOpen(true);
-      setResponse({title, message: res, success: false});
+      setResponse(res);
     }
   }
 
