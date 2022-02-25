@@ -1,3 +1,3 @@
-import ServicePage from './ServicePage';
+import ServicePage from "./ServicePage";
 
 export default ServicePage;
