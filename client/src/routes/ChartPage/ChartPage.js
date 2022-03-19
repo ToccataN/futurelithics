@@ -3,13 +3,17 @@ import {withRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import BarChartInterface from '../../components/pages/ChartPages/BarChartInterface';
+import LineChartInterface from '../../components/pages/ChartPages/LineChartInterface';
 
 import barChartData from '../../data/barChartData';
+import lineChartData from '../../data/lineChartData';
 
 const chartSwitch = (chart, info) => {
 	switch(chart){
 		case 'bar-chart':
 			return (<BarChartInterface info={info} data={barChartData} />);
+		case 'line-chart':
+			return (<LineChartInterface info={info} data={lineChartData} />);
 		default:
 			return (<BarChartInterface info={info} data={barChartData} />);
 	}
