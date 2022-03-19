@@ -70,6 +70,21 @@ const cardRoutes = [
             path: "/data-viz/chart-card/bar-charts",
             type: "page",
             level: 3,
+          },
+          {
+            name: "line_chart",
+            title: "Line Chart",
+            component: ChartPage,
+            chart: 'line-chart',
+            image: {
+              src: barCharts,
+              alt: "Placeholder",
+            },
+            description:
+              "An interactive, customizable line chart",
+            path: "/data-viz/chart-card/line-chart",
+            type: "page",
+            level: 3,
           }          
         ]
       },
