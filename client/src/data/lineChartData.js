@@ -3,7 +3,8 @@ const result = (start, end) => {
   end = Date.parse(end);
 
   const date = new Date(Math.floor(Math.random() * (end - start + 1) + start));
-  const dateArray = [date.getFullYear(), date.getMonth() + 1, date.getDate()];
+  const month = date.getMonth() + 1;
+  const dateArray = [date.getFullYear(), month, date.getDate()];
 
   return dateArray.join('-');
 }
@@ -37,4 +38,4 @@ const lineChartData = [
   {x2: 'Sales', y: 3, x: winter},
 ];
 
-export default lineChartData;
+export default [...lineChartData];
