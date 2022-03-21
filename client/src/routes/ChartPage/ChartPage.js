@@ -13,7 +13,8 @@ const chartSwitch = (chart, info) => {
 		case 'bar-chart':
 			return (<BarChartInterface info={info} data={barChartData} />);
 		case 'line-chart':
-			return (<LineChartInterface info={info} data={lineChartData} />);
+		  console.log([...lineChartData], 'parent')
+			return (<LineChartInterface info={info} data={[...lineChartData]} />);
 		default:
 			return (<BarChartInterface info={info} data={barChartData} />);
 	}

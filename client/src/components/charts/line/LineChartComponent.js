@@ -3,20 +3,22 @@ import PropTypes from 'prop-types';
 import * as d3 from 'd3';
 import BaseChart from '../BaseChart';
 
-const seasons = ['winter', 'spring', 'summer', 'fall'];
+const parseTime = d3.timeParse("%Y-%m-%d");
+const formatTime = d3.timeFormat("%Y-%m-%d");
 
-const determineSeason = (date) => {
-	const month = new Date(date).getMonth();
+const nestingFxn = (data) => {
+	const keys = data.map((d) => d.x2);
 
-	if([0,1,2].includes(month)){
-		return 0;
-	} else if([3,4,5].includes(month)){
-		return 1;
-	} else if([6,7,8].includes(month)){
-		return 2;
-	} else if([9,10,11].includes(month)){
-		return 3;
-	}
+	const object = {};
+
+	keys.map((key) => {
+		const values = data.filter((d) => d.x2 == key)
+
+	  object[key] = values;
+	})
+
+	return object;
+
 }
 
 class LineChart extends BaseChart {
@@ -25,6 +27,10 @@ class LineChart extends BaseChart {
 		
 		this.colorFxn = d3.scaleOrdinal(d3[`scheme${options.colorScheme.scheme}`]);
 		this.createTooltip();
+
+		this.duration = 1000;
+
+		this.selectedLine = null;
 	}
 
 	createTooltip(){
@@ -36,44 +42,90 @@ class LineChart extends BaseChart {
 	displayTooltip(e, d){
 	  
     this.targetBar = d3.select(event.currentTarget);
-    this.targetBar.style("fill", this.color)
 
     this.tooltip.transition()		
 	    .duration(200)		
 	    .style("opacity", .9);
 
-	  const dataHtml = `Category: <strong class="text-primary">${d.x}</strong> <br /> 
-	    Subcategory: <strong class="text-primary">${d.x2}</strong> <br /> 
+	  const dataHtml = `Date: <strong class="text-primary">${formatTime(d.x)}</strong> <br /> 
+	    Category: <strong class="text-primary">${d.x2}</strong> <br /> 
 	    Value: <strong class="text-primary">${d.y}</strong>`;
 
 	  this.tooltip.html(dataHtml)
-      .style("left", (e.pageX) + "px")		
+      .style("left", (e.pageX + 10) + "px")		
       .style("top", (e.pageY - 30) + "px");
 	}
 
   hideTooltip(e){
 
   	this.targetBar = d3.select(event.currentTarget);
-  	this.targetBar.style("fill", (d) => this.colorFxn(d.x2) )
 
     this.tooltip.transition()		
 	    .duration(200)		
 	    .style("opacity", 0);
   }
 
+  lineSelector(e, d){
+  	this.targetLine = d3.select(event.currentTarget);
+  	const className = this.targetLine.attr("data-category");
+
+		if(this.selectedLine != className || className == undefined){
+			this.reColorElements();
+
+			if(className == undefined) { return; }
+		}
+
+  	if(this.selectedLine == null || this.selectedLine != className){
+
+			this.selectedLine = className;
+
+  		let nonSelected = d3.selectAll(".chart-lines, .chart-circles")
+  		  .filter( function(){
+  		  	return !this.classList.contains(className);
+  		  });
+
+  		nonSelected
+  		  .transition()
+  		  .duration(this.duration / 2)
+  		  .style("stroke", "#aaa")
+  		  .style("opacity", 0.3)
+
+  	} else {
+  		this.reColorElements();
+
+  		this.selectedLine = null;
+  	}
+
+
+  }
+
+  reColorElements(){
+		d3.selectAll(".chart-lines")
+		  .transition()
+		  .duration(this.duration / 2)
+		  .style("stroke", (line) => this.colorFxn(line[1][0].x2))
+		  .style("fill", "none")
+		  .style("opacity", 1);
+
+		d3.selectAll(".chart-circles")
+		  .transition()
+		  .duration(this.duration / 2)
+		  .style("fill", '#90f1c4')
+		  .style("stroke", "none")
+		  .style("opacity", 1);
+  }
+
   setScalesAndAxis(data){
 
-  	this.scaleX = d3.scaleLinear()
+  	this.scaleX = d3.scaleTime()
 		  .domain(d3.extent(data, (d) => d.x ))
   	  .range([this.margins.left, this.dimensions.innerWidth ] );
 
   	this.scaleY = d3.scaleLinear()
   	  .domain([0, d3.max(data, (d) => d.y) + 1])
-  	  .range([this.dimensions.innerHeight, this.margins.bottom])
+  	  .range([this.dimensions.innerHeight, 0])
 
-  	this.axisX = d3.axisBottom(this.scaleX).ticks(4).tickFormat( (d) =>{
-  	  return seasons[d] 
-  	});
+  	this.axisX = d3.axisBottom(this.scaleX).ticks(12);
 
   	this.axisY = d3.axisLeft(this.scaleY).ticks(5);
 
@@ -106,56 +158,90 @@ class LineChart extends BaseChart {
 
   setInitialLines(data){
 
-  	const nestData = d3.group(data, ( d )=> d.x2 );
-
-  	console.log(nestData, 'nested!')
-
   	const line =  d3.line()
 	  	.x( (d) => this.scaleX(d.x) )
-	  	.y( (d) => this.scaleY(d.y) );
+	  	.y( (d) => this.scaleY(d.y) - this.margins.left );
 
-	  this.lines = this.mainGroup.append("g")
+	  this.linesGroup = this.mainGroup.append("g")
   	
-  	this.lines.selectAll("path")
-	  	  .data(nestData)
-	  	  .join("path")
+  	this.lines = this.linesGroup.selectAll("path")
+	  	  .data(data)
+	  	  .enter().append("path")
+	  	    .attr("class", (d) => `chart-lines ${d[1][0].x2}` )
+	  	    .attr("data-category", (d) => d[1][0].x2 )
 		  	  .attr("stroke", (d) => this.colorFxn(d[0]) )
 		  	  .attr('fill', 'none')
 	        .attr("stroke-width", 1.5)
-		  	  .attr("d",(d) => line(d[1]) )
-	  	  
-/*	  this.lines
-	      .transition()
-	  	  .attr("width",(d) => this.scaleY(d.y) - this.margins.left )
+		  	  .attr("d",(d) => line(d[1]) );
 
-	  this.lines.on("mouseover", (e, d) => this.displayTooltip(e, d) )
-	  	  .on("mouseout", (e) => this.hideTooltip(e) )  
-	  	  .on("touchstart", (e, d) => this.displayTooltip(e, d) )
-	  	  .on("touchend", (e) => this.hideTooltip(e) )
-*/	
+		this.lineNodes = d3.selectAll('.chart-lines').nodes();
+
+		this.lineNodes.forEach((d) => {
+			const node = d3.select(d);
+
+			let lineLength = node.node().getTotalLength();
+
+	    node.attr("stroke-dasharray", lineLength)
+		    .attr("stroke-dashoffset", lineLength)
+		    .attr("stroke-width", 3)
+		    .transition()
+		    .duration(this.duration)
+		    .attr("stroke-dashoffset", 0);
+
+		  node.on("click", (e, d) => this.lineSelector(e, d))
+		})
+  }
+
+  setCirclePoints(data){
+  	this.circleGroup = this.mainGroup.append('g');
+
+  	this.circles = this.circleGroup.selectAll("circle")
+  	  .data(data)
+  	  .enter()
+  	  .append("circle");
+
+  	this.circles
+  	  .attr("data-category", (d) => d.x2 )
+  	  .attr('class', (d) => `chart-circles ${d.x2}` )
+	    .attr("cx", (d) => this.scaleX(d.x) )
+	    .attr("cy", (d) => this.scaleY(d.y) - this.margins.left ) 
+	    .attr("r", 5)
+	    .style('fill', '#90f1c4')
+	    .style('opacity', 0);
+
+  	this.circles
+	    .transition()
+	    .delay(this.duration)
+	    .duration(this.duration / 4)
+	    .style('opacity', 1);
+
+	  this.circles
+      .on("mouseover", (e, d) => this.displayTooltip(e, d) )
+  	  .on("mouseout", (e) => this.hideTooltip(e) )
+  	  .on("touchstart", (e, d) => this.displayTooltip(e, d) )
+  	  .on("touchend", (e) => this.hideTooltip(e) )
+  	  .on("click", (e, d) => this.lineSelector(e, d))
+
   }
 
   displayData(data){
 
-  	data = data.map((d) => {
-  		const date = determineSeason(d.x);
-  		d.x = date
+  	const newData = [...data].map( (d) => {
+      return {x: parseTime(d.x), y: d.y, x2: d.x2};
+    });
 
-  		return d;
-  	})
-
-  	this.setScalesAndAxis(data);
-  	this.setInitialLines(data);
+    const nestData = d3.group(newData, (d) => d.x2);
+		
+  	this.setScalesAndAxis(newData);
+  	this.setInitialLines(nestData);
+  	this.setCirclePoints(newData);
   }
-
 
 }
 
 const LineChartComponent = (props) => {
 
 	const { data, options } = props;
-
-	const [ dataArray, setDataArray ] = useState(data);
 
 	const defaultOptions = {
     containerId: "line-chart",
@@ -176,7 +262,7 @@ const LineChartComponent = (props) => {
   useEffect(()=>{
   	const chart = new LineChart(getOptions); 
     chart.createChart();
-	  chart.displayData(dataArray)
+	  chart.displayData(data)
   }, [options])
 
 	return (

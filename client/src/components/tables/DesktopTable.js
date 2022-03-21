@@ -27,8 +27,6 @@ const DoubleCategory = (props) => {
 		}
 	}
 
-	console.log(dataTable, "data!")
-
 	let rows = 0;
 
 	for(let header in dataTable){
@@ -150,7 +148,7 @@ SingleCategory.propTypes = {
 
 const DesktopTable = (props) => {
 	
-	const { data, type } = props;	
+	const { data, type } = props;
 
 	return (
 		<div className="desktop-table-container">

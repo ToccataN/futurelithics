@@ -21,6 +21,8 @@ const LineChartInterface = (props) => {
 
 	const { data, info } = props;
 
+	const [ stateData, setStateData ] = useState([...data]);
+
 	const [ colorScheme, setColorScheme] = useState(options.colorScheme[0]);
 
 	const colorSetter = (value) => {
@@ -35,6 +37,8 @@ const LineChartInterface = (props) => {
 	  height: 300
 	}
 
+	const stillData = [...data.map((d) => d)];
+
 	return (
 		<div className="bar-chart-container container my-4" >
 		  <div className="p-4 ash-container my-2">
@@ -42,13 +46,13 @@ const LineChartInterface = (props) => {
 				<div className="col-md-3 py-2">
 			  	<SelectInput options={options.colorScheme} value={colorScheme.value} handler={colorSetter} />
 			  </div>
-				<LineChartComponent options={componentOptions} data={data} />
+				<LineChartComponent options={componentOptions} data={stillData} />
 			</div>
 			<div className="text-center p-4 ash-container my-4 d-none d-md-block">
-		  	<DesktopTable  data={data} type={'double'} />
+		  	<DesktopTable  data={stateData} type={'double'} />
 		  </div>
 		  <div className="text-center p-4 ash-container my-4 d-block d-md-none">
-		  	<MobileTable  data={data} type={'double'} />
+		  	<MobileTable  data={stateData} type={'double'} />
 		  </div>
 		</div>
 	)
