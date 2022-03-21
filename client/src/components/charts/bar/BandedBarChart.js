@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
-import PropTypes from "prop-types";
-import * as d3 from "d3";
-import BaseChart from "./BaseChart";
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
+import * as d3 from 'd3';
+import BaseChart from '../BaseChart';
 
-class StackedBarChart extends BaseChart {
+class BandedBarChart extends BaseChart {
   constructor(options) {
     super(options);
 
@@ -47,6 +47,11 @@ class StackedBarChart extends BaseChart {
       .scaleBand()
       .domain(data.map((d) => d.x))
       .range([this.margins.left, this.dimensions.innerWidth]);
+
+    this.scaleX2 = d3
+      .scaleBand()
+      .domain(new Set([...data.map((d) => d.x2)]))
+      .range([0, this.scaleX.bandwidth() - this.margins.right]);
 
     this.scaleY = d3
       .scaleLinear()
@@ -120,9 +125,12 @@ class StackedBarChart extends BaseChart {
       .enter()
       .append("rect")
       .attr("class", "rects")
-      .attr("x", (d) => this.scaleX(d.x))
+      .attr(
+        "x",
+        (d) => this.scaleX(d.x) + this.scaleX2(d.x2) - this.margins.left / 2
+      )
       .style("fill", (d) => this.colorFxn(d.x2))
-      .attr("width", this.scaleX.bandwidth() - this.margins.left * 2)
+      .attr("width", this.scaleX2.bandwidth())
       .attr("height", 0)
       .attr("y", this.scaleY(0));
 
@@ -148,6 +156,11 @@ class StackedBarChart extends BaseChart {
       .scaleLinear()
       .domain([0, d3.max(data, (d) => d.y) + 1])
       .range([this.margins.left, this.dimensions.innerWidth]);
+
+    this.scaleX2 = d3
+      .scaleBand()
+      .domain(new Set([...data.map((d) => d.x2)]))
+      .range([0, this.scaleX.bandwidth() - this.margins.right]);
 
     this.axisX = d3.axisLeft(this.scaleX).ticks(data.map((d) => d.x).length);
     this.axisY = d3.axisTop(this.scaleY).ticks(5);
@@ -208,10 +221,13 @@ class StackedBarChart extends BaseChart {
       .data(data)
       .enter()
       .append("rect")
-      .attr("y", (d) => this.scaleX(d.x) - this.margins.top / 2)
+      .attr(
+        "y",
+        (d) => this.scaleX(d.x) + this.scaleX2(d.x2) - this.margins.top / 2
+      )
       .style("fill", (d) => this.colorFxn(d.x2))
       .attr("width", 0)
-      .attr("height", this.scaleX.bandwidth() - this.margins.left)
+      .attr("height", this.scaleX2.bandwidth())
       .attr("x", this.scaleY(0));
 
     this.bars
@@ -234,7 +250,7 @@ class StackedBarChart extends BaseChart {
   }
 }
 
-const StackedBarComponent = (props) => {
+const BandedBarComponent = (props) => {
   const { data, options } = props;
 
   const defaultOptions = {
@@ -252,23 +268,20 @@ const StackedBarComponent = (props) => {
     }
   };
 
-  /* values should be sorted so longer rectangles are rendered first */
-  let sortedData = [...data].sort((a, b) => b.y - a.y);
-
   const getOptions = setOptions(options);
 
   useEffect(() => {
-    const chart = new StackedBarChart(getOptions);
+    const chart = new BandedBarChart(getOptions);
     chart.createChart();
-    chart.displayData(getOptions, sortedData);
+    chart.displayData(getOptions, data);
   }, [options]);
 
   return <div id={getOptions.containerId} className="chart-viewbox"></div>;
 };
 
-StackedBarComponent.propTypes = {
+BandedBarComponent.propTypes = {
   data: PropTypes.any,
   options: PropTypes.any,
 };
 
-export default StackedBarComponent;
+export default BandedBarComponent;
