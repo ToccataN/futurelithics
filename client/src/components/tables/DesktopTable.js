@@ -27,7 +27,7 @@ const DoubleCategory = (props) => {
     }
   }
 
-  let rows = 0;
+	let rows = 0;
 
   for (let header in dataTable) {
     const main = dataTable[header];
