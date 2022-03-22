@@ -33,11 +33,11 @@ class LineChart extends BaseChart {
 		this.selectedLine = null;
 	}
 
-	createTooltip(){
-		this.tooltip = d3.select("body").append("div")
-      .attr("class", "tooltip")
-		  .style("opacity", 0);
-	}
+	dataHtml(d){
+		return `Date: <strong class="text-primary">${formatTime(d.x)}</strong> <br /> 
+	    Category: <strong class="text-primary">${d.x2}</strong> <br /> 
+	    Value: <strong class="text-primary">${d.y}</strong>`;
+	} 
 
 	displayTooltip(e, d){
 	  
@@ -47,11 +47,7 @@ class LineChart extends BaseChart {
 	    .duration(200)		
 	    .style("opacity", .9);
 
-	  const dataHtml = `Date: <strong class="text-primary">${formatTime(d.x)}</strong> <br /> 
-	    Category: <strong class="text-primary">${d.x2}</strong> <br /> 
-	    Value: <strong class="text-primary">${d.y}</strong>`;
-
-	  this.tooltip.html(dataHtml)
+	  this.tooltip.html(this.dataHtml(d))
       .style("left", (e.pageX + 10) + "px")		
       .style("top", (e.pageY - 30) + "px");
 	}
