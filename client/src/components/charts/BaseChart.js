@@ -49,6 +49,42 @@ class BaseChart {
       `translate(${this.margins.left}, ${this.margins.top})`
     );
   }
+
+	createTooltip(){
+		this.tooltip = d3.select("body").append("div")
+      .attr("class", "tooltip")
+		  .style("opacity", 0);
+	}
+
+	dataHtml(d){
+	  return `Category: <strong class="text-primary">${d.x}</strong> <br /> 
+	    Subcategory: <strong class="text-primary">${d.x2}</strong> <br /> 
+	    Value: <strong class="text-primary">${d.y}</strong>`;
+	}
+
+	displayTooltip(e, d){
+	  
+    this.targetBar = d3.select(event.currentTarget);
+    this.targetBar.style("fill", this.color)
+
+    this.tooltip.transition()		
+	    .duration(200)		
+	    .style("opacity", .9);
+
+	  this.tooltip.html(this.dataHtml(d))
+      .style("left", (e.pageX) + "px")		
+      .style("top", (e.pageY - 30) + "px");
+	}
+
+  hideTooltip(e){
+
+  	this.targetBar = d3.select(event.currentTarget);
+  	this.targetBar.style("fill", (d) => this.colorFxn(d.x2) )
+
+    this.tooltip.transition()		
+	    .duration(200)		
+	    .style("opacity", 0);
+  }
 }
 
 export default BaseChart;
