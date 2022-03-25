@@ -6,27 +6,14 @@ import BaseChart from '../BaseChart';
 const parseTime = d3.timeParse("%Y-%m-%d");
 const formatTime = d3.timeFormat("%Y-%m-%d");
 
-const nestingFxn = (data) => {
-	const keys = data.map((d) => d.x2);
-
-	const object = {};
-
-	keys.map((key) => {
-		const values = data.filter((d) => d.x2 == key)
-
-	  object[key] = values;
-	})
-
-	return object;
-
-}
-
 class LineChart extends BaseChart {
 	constructor(options){
 		super(options);
 		
 		this.colorFxn = d3.scaleOrdinal(d3[`scheme${options.colorScheme.scheme}`]);
 		this.createTooltip();
+
+		this.curve = d3[`${options.curve}`] || d3.curveLinear;
 
 		this.duration = 1000;
 
@@ -156,7 +143,8 @@ class LineChart extends BaseChart {
 
   	const line =  d3.line()
 	  	.x( (d) => this.scaleX(d.x) )
-	  	.y( (d) => this.scaleY(d.y) - this.margins.left );
+	  	.y( (d) => this.scaleY(d.y) - this.margins.left )
+	  	.curve(this.curve);
 
 	  this.linesGroup = this.mainGroup.append("g")
   	

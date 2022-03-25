@@ -1,5 +1,7 @@
 import LineChartComponent from './LineChartComponent';
+import AreaChartComponent from './AreaChartComponent';
 
 export {
-	LineChartComponent
+	LineChartComponent,
+	AreaChartComponent
 }
