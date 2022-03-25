@@ -14,6 +14,7 @@ import Profitsbyregion from "../assets/images/Profitsbyregion.jpg";
 import globalConflict from "../assets/images/globalConflict.jpg";
 import figmaMockup from "../assets/images/FigmaMockup.jpg";
 import barCharts from "../assets/images/barCharts.png";
+import linechart from "../assets/images/linechart.jpg";
 
 const basicRoutes = [
   {
@@ -76,11 +77,11 @@ const cardRoutes = [
             component: ChartPage,
             chart: 'line-chart',
             image: {
-              src: barCharts,
+              src: linechart,
               alt: "Placeholder",
             },
             description:
-              "An interactive, customizable line chart",
+              "Customizable line and area charts featuring different curve functions.",
             path: "/data-viz/chart-card/line-chart",
             type: "page",
             level: 3,
