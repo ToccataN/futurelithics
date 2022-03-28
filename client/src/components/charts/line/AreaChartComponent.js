@@ -7,7 +7,7 @@ const parseTime = d3.timeParse("%Y-%m-%d");
 const formatTime = d3.timeFormat("%Y-%m-%d");
 
 class AreaChart extends BaseChart {
-		constructor(options){
+	constructor(options, data){
 		super(options);
 		
 		this.colorFxn = d3.scaleOrdinal(d3[`scheme${options.colorScheme.scheme}`]);
@@ -17,7 +17,7 @@ class AreaChart extends BaseChart {
 
 		this.duration = 1000;
 
-		this.selectedLine = null;
+		this.data = data;
 	}
 
 	dataHtml(d){
@@ -49,30 +49,58 @@ class AreaChart extends BaseChart {
   }
 
   reColorElements(){
-		d3.selectAll(".chart-lines")
+		d3.selectAll(".chart-area")
 		  .transition()
 		  .duration(this.duration / 2)
-		  .style("stroke", (line) => this.colorFxn(line[1][0].x2))
-		  .style("fill", "none")
-		  .style("opacity", 1);
+		  .style("fill", ([{i}]) => this.colorFxn(this.categories[i]))
+		  .style("opacity", 1)
+  }
 
-		d3.selectAll(".chart-circles")
-		  .transition()
-		  .duration(this.duration / 2)
-		  .style("fill", '#90f1c4')
-		  .style("stroke", "none")
-		  .style("opacity", 1);
+  selectData(e, d){
+  	this.targetLine = d3.select(event.currentTarget);
+
+  	const className = this.targetLine.attr("data-category");
+
+		if(this.selected != className || className == undefined){
+			this.reColorElements();
+
+			if(className == undefined) { return; }
+		}
+
+  	if(this.selected == null || this.selected != className){
+
+			this.selected = className;
+
+  		let nonSelected = d3.selectAll(".chart-area")
+  		  .filter( function(){
+  		  	return d3.select(this).attr("data-category") != className;
+  		  });
+
+  		nonSelected
+  		  .transition()
+  		  .duration(this.duration / 2)
+  		  .style("fill", "#aaa")
+  		  .style("opacity", 0.3)
+
+  		const filterData = this.data.filter((d) => d.x2 == className)
+
+      this.displayData(filterData) 
+
+  	} else {
+  		this.reColorElements();
+
+  		this.displayData(this.data)
+  		this.selected = null;
+  	}
   }
 
   displayData(data){
 
-  	const newData = [...data].map( (d) => {
-      return {x: parseTime(d.x), y: d.y, x2: d.x2};
-    });
+  	this.mainGroup.selectAll("*").remove();
 
-    this.times = newData.map((d) => d.x);
-    this.categories = newData.map( d => d.x2);
-    this.vals = newData.map( d => d.y);
+    this.times = data.map((d) => d.x);
+    this.categories = data.map( d => d.x2);
+    this.vals = data.map( d => d.y);
 
     const keys = new d3.InternSet( this.categories );
 
@@ -106,15 +134,15 @@ class AreaChart extends BaseChart {
   	const yDomain = d3.extent(this.mappedSeries.flat(2));
 
   	this.scaleY = d3.scaleLinear()
-  	  .domain([yDomain[0], yDomain[1] * 2 ])
-  	  .range([this.dimensions.innerHeight, 0])
+  	  .domain([yDomain[0], Math.round(yDomain[1] * 1.5) ])
+  	  .range([this.dimensions.innerHeight, 20])
 
   	this.axisX = d3.axisBottom(this.scaleX).ticks(12);
 
-  	this.axisY = d3.axisLeft(this.scaleY).ticks(6);
+  	this.axisY = d3.axisLeft(this.scaleY).ticks(5);
 
   	this.axisXGrid = d3.axisBottom(this.scaleX).ticks(12).tickFormat("").tickSize(-this.dimensions.innerHeight + this.margins.top);
-  	this.axisYGrid = d3.axisLeft(this.scaleY).ticks(6).tickFormat("").tickSize(-this.dimensions.innerWidth + this.margins.left );  	
+  	this.axisYGrid = d3.axisLeft(this.scaleY).ticks(5).tickFormat("").tickSize(-this.dimensions.innerWidth + this.margins.left );  	
 
   	this.bottomAxis = this.mainGroup.append("g")
   	  .attr("class", "text-secondary")
@@ -149,6 +177,8 @@ class AreaChart extends BaseChart {
 	    .join("path")
 	      
 	  this.area
+	    .attr("data-category", ([{i}]) => `${this.categories[i]}`)
+	    .attr("class", 'chart-area')
       .attr("fill", ([{i}]) => this.colorFxn(this.categories[i]))
       .attr("d", (d) => this.drawArea(d, true, false))
       .transition()
@@ -160,6 +190,7 @@ class AreaChart extends BaseChart {
 	  	.on('mouseout', (e) => this.hideTooltip(e) )
 	  	.on('touchstart', (e, d, i) => this.displayTooltip(e, d, i) )
 	  	.on('touchend', (e) => this.hideTooltip(e) )
+	  	.on("click", (e, d) => this.selectData(e, d) )
 	  
 
   }
@@ -191,12 +222,16 @@ const AreaChartComponent = (props) => {
 		}
   }
 
+  const newData = [...data].map( (d) => {
+    return {x: parseTime(d.x), y: d.y, x2: d.x2};
+  });
+
   const getOptions = setOptions(options);
 
   useEffect(()=>{
-  	const chart = new AreaChart(getOptions); 
+  	const chart = new AreaChart(getOptions, newData); 
     chart.createChart();
-	  chart.displayData(data)
+	  chart.displayData(newData)
   }, [options])
 
 	return (
