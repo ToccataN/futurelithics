@@ -92,7 +92,7 @@ class AreaChart extends BaseChart {
   		this.reColorElements();
 
   		this.displayData(this.data)
-  		this.selectedLine = null;
+  		this.selected = null;
   	}
   }
 
