@@ -18,8 +18,6 @@ class AreaChart extends BaseChart {
 		this.duration = 1000;
 
 		this.data = data;
-
-		this.selected = null;
 	}
 
 	dataHtml(d){

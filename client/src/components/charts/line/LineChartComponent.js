@@ -16,8 +16,6 @@ class LineChart extends BaseChart {
 		this.curve = d3[`${options.curve}`] || d3.curveLinear;
 
 		this.duration = 1000;
-
-		this.selectedLine = null;
 	}
 
 	dataHtml(d){
@@ -52,15 +50,15 @@ class LineChart extends BaseChart {
   	this.targetLine = d3.select(event.currentTarget);
   	const className = this.targetLine.attr("data-category");
 
-		if(this.selectedLine != className || className == undefined){
+		if(this.selected != className || className == undefined){
 			this.reColorElements();
 
 			if(className == undefined) { return; }
 		}
 
-  	if(this.selectedLine == null || this.selectedLine != className){
+  	if(this.selected == null || this.selected != className){
 
-			this.selectedLine = className;
+			this.selected = className;
 
   		let nonSelected = d3.selectAll(".chart-lines, .chart-circles")
   		  .filter( function(){
@@ -76,7 +74,7 @@ class LineChart extends BaseChart {
   	} else {
   		this.reColorElements();
 
-  		this.selectedLine = null;
+  		this.selected = null;
   	}
 
 

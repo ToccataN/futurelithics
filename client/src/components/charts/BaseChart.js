@@ -14,6 +14,8 @@ class BaseChart {
     this.containerId = options.containerId;
     this.container = d3.select(`#${this.containerId}`);
     this.container.selectAll("svg").remove();
+
+    this.selected = null;
   }
 
   setDimensions() {
